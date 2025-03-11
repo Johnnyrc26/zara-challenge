@@ -1,0 +1,45 @@
+/* src/components/Navbar/Navbar.css */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Siempre justificado entre elementos */
+  align-items: center;
+  padding: 1rem;
+  background-color: #f8f9fa; /* Fondo claro */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ocupa todo el ancho */
+  position: sticky; /* Opcional: fija el navbar en la parte superior */
+  top: 0;
+  z-index: 1000; /* Asegura que esté sobre otros elementos */
+}
+
+.navbar-icon {
+  cursor: pointer;
+  font-size: 1.5rem;
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ef4444; /* Rojo */
+  color: white;
+  border-radius: 50%;
+  width: 1.2rem;
+  height: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+}
+
+/* Responsividad */
+@media (max-width: 640px) {
+  .navbar {
+    padding: 0.5rem; /* Reduce padding en móvil */
+  }
+
+  .navbar-icon {
+    font-size: 1.25rem; /* Reduce tamaño de íconos en móvil */
+  }
+}

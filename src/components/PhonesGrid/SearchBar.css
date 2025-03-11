@@ -1,0 +1,121 @@
+/* PhonesGrid.css */
+.container {
+  padding: 1rem;
+}
+
+.search-container {
+  margin-bottom: 1rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db; /* gray-300 */
+  border-radius: 0.375rem; /* rounded */
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #3b82f6; /* blue-500 */
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+.results-count {
+  margin-top: 0.5rem;
+  font-size: 0.875rem; /* text-sm */
+  color: #6b7280; /* gray-500 */
+}
+
+.loading-text {
+  text-align: center;
+  color: #6b7280; /* gray-500 */
+}
+
+.error-text {
+  text-align: center;
+  color: #ef4444; /* red-500 */
+}
+
+.empty-text {
+  text-align: center;
+  color: #6b7280; /* gray-500 */
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr; /* grid-cols-1 */
+  gap: 1rem; /* gap-4 */
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr); /* sm:grid-cols-2 */
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(5, 1fr); /* lg:grid-cols-5 */
+  }
+}
+
+.card {
+  border: 1px solid #e5e7eb; /* border */
+  padding: 1rem; /* p-4 */
+  border-radius: 0.5rem; /* rounded-lg */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* shadow-md */
+  transition: box-shadow 0.2s ease-in-out; /* transition */
+  cursor: pointer;
+}
+
+.card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* hover:shadow-lg */
+}
+
+.image {
+  width: 100%; /* w-full */
+  height: 10rem; /* h-40 */
+  object-fit: cover; /* object-cover */
+  border-radius: 0.375rem; /* rounded-md */
+}
+
+.title {
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 600; /* font-semibold */
+  margin-top: 0.5rem; /* mt-2 */
+}
+
+.brand {
+  font-size: 0.875rem; /* text-sm */
+  color: #4b5563; /* text-gray-600 */
+}
+
+.price {
+  font-size: 1rem; /* text-md */
+  font-weight: 700; /* font-bold */
+  margin-top: 0.25rem; /* mt-1 */
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between; /* flex justify-between */
+  margin-top: 1rem; /* mt-4 */
+}
+
+.button {
+  padding: 0.5rem 1rem; /* px-4 py-2 */
+  border-radius: 0.375rem; /* rounded */
+  background: #3b82f6; /* bg-blue-500 */
+  color: white; /* text-white */
+}
+
+.button:hover {
+  background: #2563eb; /* Slightly darker blue on hover */
+}
+
+.button:disabled {
+  background: #d1d5db; /* bg-gray-300 */
+  opacity: 0.5; /* disabled:opacity-50 */
+  cursor: not-allowed;
+}
