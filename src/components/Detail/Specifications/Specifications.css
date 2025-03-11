@@ -1,0 +1,23 @@
+/* src/components/PhoneDetail/Specifications.css */
+.specs {
+  margin-top: 2rem;
+}
+
+.specs h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.specs ul {
+  list-style: none;
+  padding: 0;
+}
+
+.specs li {
+  margin-bottom: 0.5rem;
+}
+
+.specs .selected {
+  font-weight: bold;
+  color: #10b981; /* green-500 */
+}

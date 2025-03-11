@@ -4,7 +4,11 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useCartStore } from '../../store/cartStore'
 import './Navbar.css'
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  isLoading?: boolean; // Prop opcional para mostrar la barra de carga
+}
+
+const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) =>{
   const cartCount = useCartStore((state) => state.getTotalItems())
   const navigate = useNavigate()
   const location = useLocation()
@@ -26,6 +30,7 @@ const Navbar: React.FC = () => {
           {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
         </div>
       )}
+      {isLoading && <div className="loading-bar"></div>}
     </nav>
   )
 }

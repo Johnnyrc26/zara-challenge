@@ -1,15 +1,16 @@
 /* src/components/Navbar/Navbar.css */
 .navbar {
   display: flex;
-  justify-content: space-between; /* Siempre justificado entre elementos */
+  justify-content: space-between;
   align-items: center;
   padding: 1rem;
   background-color: #f8f9fa; /* Fondo claro */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 100%; /* Ocupa todo el ancho */
-  position: sticky; /* Opcional: fija el navbar en la parte superior */
+  width: 100%;
+  position: sticky;
   top: 0;
-  z-index: 1000; /* Asegura que esté sobre otros elementos */
+  z-index: 1000;
+  overflow: hidden; /* Para contener la barra de carga */
 }
 
 .navbar-icon {
@@ -33,13 +34,33 @@
   font-size: 0.75rem;
 }
 
+.loading-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px; /* Muy delgada */
+  background-color: #3b82f6; /* Azul */
+  animation: loading 2s infinite linear; /* Animación opcional */
+}
+
+/* Animación opcional para la barra */
+@keyframes loading {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 /* Responsividad */
 @media (max-width: 640px) {
   .navbar {
-    padding: 0.5rem; /* Reduce padding en móvil */
+    padding: 0.5rem;
   }
 
   .navbar-icon {
-    font-size: 1.25rem; /* Reduce tamaño de íconos en móvil */
+    font-size: 1.25rem;
   }
 }

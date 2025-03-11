@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
 interface CartItem {
-  id: number
+  id: string
   name: string
   quantity: number
 }
@@ -33,7 +33,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
   },
   removeFromCart: (itemId) => {
     set((state) => ({
-      cart: state.cart.filter((item) => item.id !== parseInt(itemId)),
+      cart: state.cart.filter((item) => item.id !== itemId),
     }))
   },
   getTotalItems: () => {

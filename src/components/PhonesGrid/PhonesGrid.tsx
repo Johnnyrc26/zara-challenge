@@ -7,10 +7,12 @@ import './SearchBar.css'
 interface PhonesGridProps {
   initialPage?: number
   itemsPerPage?: number
+  onLoadingChange?: (isLoading: boolean) => void;
 }
 const PhonesGrid: React.FC<PhonesGridProps> = ({
   initialPage = 1,
   itemsPerPage = 21,
+  onLoadingChange
 }) => {
   const [phones, setPhones] = useState<Phones[]>([])
   const [loading, setLoading] = useState(true)
@@ -23,6 +25,7 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
     const fetchPhones = async () => {
       try {
         setLoading(true)
+        if (onLoadingChange) onLoadingChange(true);
         const data = await getPhones(page, itemsPerPage, searchQuery)
         const uniquePhones = data.filter(
           (phone, index, self) =>
@@ -35,11 +38,12 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
         setError('Error fetching phones')
       } finally {
         setLoading(false)
+        if (onLoadingChange) onLoadingChange(false);
       }
     }
 
     fetchPhones()
-  }, [page, itemsPerPage, searchQuery])
+  }, [page, itemsPerPage, searchQuery, onLoadingChange])
 
   const handlePreviousPage = () => {
     if (page > 1) {
