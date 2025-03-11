@@ -4,7 +4,6 @@ import HomePage from './pages/PhoneListHome'
 import DetailPage from './pages/PhoneDetail'
 import CartView from './pages/CartView';
 // import { CartProvider } from './context/CartContext';
-// import './assets/styles/global.css';
 
 function App() {
   return (

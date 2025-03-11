@@ -1,11 +1,9 @@
-/* src/components/Navbar/Navbar.css */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #f8f9fa; /* Fondo claro */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
   width: 100%;
   position: sticky;
   top: 0;
@@ -13,10 +11,16 @@
   overflow: hidden; /* Para contener la barra de carga */
 }
 
-.navbar-icon {
+.navbar-image {
   cursor: pointer;
   font-size: 1.5rem;
   position: relative;
+}
+
+.home-icon {
+  width: 120px;
+  height: auto;
+  object-fit: contain;
 }
 
 .cart-badge {
@@ -32,6 +36,24 @@
   align-items: center;
   justify-content: center;
   font-size: 0.75rem;
+}
+
+.cart-icon {
+  font-size: 24px; /* Tamaño del ícono SlBag */
+  color: #000000; /* Color del ícono, ajustable */
+}
+
+.cart-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent; /* Rojo para el badge */
+  color: black;
+  border-radius: 50%;
+  padding: 1.8rem 0.5rem;
+  font-size: 1rem;
+  min-width: 1rem;
+  height: 1rem;
 }
 
 .loading-bar {

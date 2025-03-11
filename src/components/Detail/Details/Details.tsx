@@ -50,58 +50,60 @@ const Details: React.FC<DetailsProps> = ({
   
     return (
       <div className="phone-detail">
-        <div className="phone-image">
+      <div className="phone-image">
           <img
             src={selectedColorOption?.imageUrl || phone.imageUrl}
             alt={phone.name}
           />
-        </div>
-        <div className="phone-info">
-          <h1>{phone.name}</h1>
-          <p className="brand">{phone.brand}</p>
-  
-          <div className="selectors">
-            <div>
-              <label>Storage:</label>
-              <select
-                value={selectedStorage || ''}
-                onChange={(e) => onStorageChange(e.target.value || null)}
-              >
-                <option value="">Select storage</option>
-                {phone.storageOptions.map((option) => (
-                  <option key={option.capacity} value={option.capacity}>
-                    {option.capacity}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label>Color:</label>
-              <select
-                value={selectedColor || ''}
-                onChange={(e) => onColorChange(e.target.value)}
-              >
-                <option value="">Select color</option>
-                {phone.colorOptions.map((option) => (
-                  <option key={option.name} value={option.name}>
-                    {option.name}
-                  </option>
-                ))}
-              </select>
+      </div>
+      <div className="phone-info">
+        <h1>{phone.name}</h1>
+        <p className="price">{totalPrice} EUR</p>
+
+        <div className="selectors">
+          <div>
+            <label>Storage ¿HOW MUCH SPACE DO YOU NEED?</label>
+            <div className="storage-options">
+              {phone.storageOptions.map((option) => (
+                <button
+                  key={option.capacity}
+                  className={`storage-button ${
+                    selectedStorage === option.capacity ? 'selected' : ''
+                  }`}
+                  onClick={() => onStorageChange(option.capacity)}
+                >
+                  {option.capacity}
+                </button>
+              ))}
             </div>
           </div>
-  
-          <p className="price">Price: ${totalPrice}</p>
-  
-          <button
-            className="add-to-cart-button"
-            onClick={handleAddToCart}
-            disabled={!selectedStorage || !selectedColor}
-          >
-            Add to Cart
-          </button>
+          <div>
+            <label>Color, pick your favourite.</label>
+            <div className="color-options">
+              {phone.colorOptions.map((option) => (
+                <div
+                  key={option.name}
+                  className={`color-button ${
+                    selectedColor === option.name ? 'selected' : ''
+                  }`}
+                  style={{ backgroundColor: option.hexCode }}
+                  onClick={() => onColorChange(option.name)}
+                  title={option.name}
+                />
+              ))}
+            </div>
+          </div>
         </div>
+
+        <button
+          className="add-to-cart-button"
+          onClick={handleAddToCart}
+          disabled={!selectedStorage || !selectedColor}
+        >
+          AÑADIR
+        </button>
       </div>
+    </div>
     );
   };
   

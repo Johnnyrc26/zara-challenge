@@ -89,8 +89,8 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
             onClick={() => navigate(`/phone/${phone.id}`)}
           >
             <img src={phone.imageUrl} alt={phone.name} className="image" />
-            <h3 className="title">{phone.name}</h3>
             <p className="brand">{phone.brand}</p>
+            <h3 className="title">{phone.name}</h3>
             <p className="price">${phone.basePrice}</p>
           </div>
         ))}

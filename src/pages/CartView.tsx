@@ -15,7 +15,6 @@ const CartView: React.FC = () => {
 
   return (
     <div className="cart-view-container">
-      <h1>Your Cart</h1>
       <ProductsCount count={cart.length} />
       {cart.length === 0 ? (
         <p>No items in cart</p>

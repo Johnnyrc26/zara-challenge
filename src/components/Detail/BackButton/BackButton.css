@@ -1,8 +1,7 @@
-/* src/components/BackButton/BackButton.css */
 .back-button {
   padding: 0.5rem 1rem;
-  background-color: #6b7280; /* gray-500 */
-  color: white;
+  background-color: white;
+  color: rgb(0, 0, 0);
   border: none;
   border-radius: 0.375rem; /* rounded */
   cursor: pointer;
