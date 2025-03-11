@@ -1,9 +1,12 @@
 import { create } from 'zustand'
 
-interface CartItem {
-  id: string
-  name: string
-  quantity: number
+export interface CartItem {
+  id: string;
+  name: string;
+  quantity: number;
+  price: number; 
+  imageUrl: string; 
+  color: string;
 }
 
 interface CartStore { 

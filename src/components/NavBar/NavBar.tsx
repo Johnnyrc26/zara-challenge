@@ -18,6 +18,9 @@ const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) =>{
   const handleHomeClick = () => {
     navigate('/')
   }
+  const handleShoppingCart = () => {
+    navigate('/cart')
+  }
 
   return (
     <nav className="navbar">
@@ -25,7 +28,7 @@ const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) =>{
         <span className="home-icon">🏠</span>
       </div>
       {!isCartView && ( // Ocultamos el carrito si estamos en /cart
-        <div className="navbar-icon">
+        <div className="navbar-icon" onClick={handleShoppingCart}>
           <span className="cart-icon">🛒</span>
           {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
         </div>

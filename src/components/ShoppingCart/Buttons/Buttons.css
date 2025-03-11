@@ -1,0 +1,64 @@
+/* src/components/Cart/Buttons.css */
+.cart-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.continue-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #6b7280; /* gray-500 */
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
+.continue-button:hover {
+  background-color: #4b5563; /* gray-600 */
+}
+
+.total-and-pay {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.total-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.pay-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #10b981; /* green-500 */
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
+.pay-button:hover {
+  background-color: #059669; /* green-600 */
+}
+
+.pay-button:disabled {
+  background-color: #d1d5db; /* gray-300 */
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .cart-buttons {
+    flex-direction: column;
+  }
+
+  .total-and-pay {
+    flex-direction: column;
+    text-align: center;
+  }
+}

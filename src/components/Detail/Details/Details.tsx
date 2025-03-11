@@ -40,6 +40,9 @@ const Details: React.FC<DetailsProps> = ({
           id: phone.id,
           name: `${phone.name} (${selectedStorage}, ${selectedColor})`,
           quantity: 1,
+          price: totalPrice,
+          imageUrl: selectedColorOption?.imageUrl || phone.imageUrl,
+          color: ''
         });
         onAddToCart();
       }
