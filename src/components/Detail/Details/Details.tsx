@@ -81,7 +81,7 @@ const Details: React.FC<DetailsProps> = ({
             <label>Color, pick your favourite.</label>
             <div className="color-options">
               {phone.colorOptions.map((option) => (
-                <div
+                <button
                   key={option.name}
                   className={`color-button ${
                     selectedColor === option.name ? 'selected' : ''

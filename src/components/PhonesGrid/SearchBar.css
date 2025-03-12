@@ -4,21 +4,23 @@
 
 .search-input {
   width: 100%;
-  padding: 1rem;
+  padding-bottom: 0.5rem;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
+  border: none;
   border-bottom: 1px solid #000000;
   background-color: white;
+  color:#6b7280
 }
 
 .search-input:focus {
-  border-color: #3b82f6; /* blue-500 */
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+  outline: none;
 }
 
 .results-count {
   margin-top: 0.5rem;
-  font-size: 0.875rem; /* text-sm */
-  color: #6b7280; /* gray-500 */
+  font-size: 1rem; /* text-sm */
+  color: #000000; /* gray-500 */
 }
 
 .loading-text {

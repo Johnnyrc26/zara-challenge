@@ -4,11 +4,10 @@
   align-items: center;
   padding: 1rem;
   background-color: white;
-  width: 100%;
   position: sticky;
   top: 0;
   z-index: 1000;
-  overflow: hidden; /* Para contener la barra de carga */
+  overflow: hidden; 
 }
 
 .navbar-image {

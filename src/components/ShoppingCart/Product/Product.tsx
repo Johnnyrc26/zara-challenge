@@ -13,9 +13,7 @@ const Product: React.FC<ProductProps> = ({ item, onRemove }) => {
       <img src={item.imageUrl} alt={item.name} className="product-image" />
       <div className="product-info">
         <h3>{item.name}</h3>
-        <p>Quantity: {item.quantity}</p>
-        <p>Color: {item.color}</p>
-        <p>Price: ${item.price * item.quantity}</p>
+        <p>Price: {item.price} EUR</p>
       </div>
       <button className="remove-button" onClick={onRemove}>
         Remove

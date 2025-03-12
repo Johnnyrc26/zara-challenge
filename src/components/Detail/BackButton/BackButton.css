@@ -11,13 +11,3 @@
   gap: 0.5rem; /* Espacio entre ícono y texto */
   transition: background-color 0.2s ease-in-out;
 }
-
-.back-button:hover {
-  background-color: #4b5563; /* gray-600 */
-}
-
-.back-button:disabled {
-  background-color: #d1d5db; /* gray-300 */
-  opacity: 0.5;
-  cursor: not-allowed;
-}

@@ -1,10 +1,8 @@
-/* src/components/Cart/Product.css */
 .cart-product {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  border: 1px solid #e5e7eb; /* gray-200 */
   border-radius: 0.375rem;
   background-color: #fff;
   color:black

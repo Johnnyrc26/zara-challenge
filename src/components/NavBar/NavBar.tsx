@@ -31,7 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
       {!isCartView && (
         <div className="navbar-icon cart-container" onClick={handleShoppingCart}>
           <SlBag className="cart-icon" />
-          {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+         <span className="cart-badge">{cartCount}</span>
         </div>
       )}
       {isLoading && <div className="loading-bar"></div>}

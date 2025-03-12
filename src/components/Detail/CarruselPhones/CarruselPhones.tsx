@@ -9,7 +9,7 @@ interface CarouselPhonesProps {
 const CarouselPhones: React.FC<CarouselPhonesProps> = ({ similarProducts }) => {
   return (
     <div className="similar-products">
-      <h2>Similar Products</h2>
+      <h2>Similar Items</h2>
       <div className="carousel">
         {similarProducts.map((phone) => (
           <div key={phone.id} className="carousel-item">
