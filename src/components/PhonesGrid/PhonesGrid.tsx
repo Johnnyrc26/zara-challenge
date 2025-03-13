@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getPhones, Phones } from '../../api/phoneService'
+import { RiArrowLeftSLine, RiArrowRightSLine } from 'react-icons/ri'
+
 import './PhonesGrid.css'
 import './SearchBar.css'
 
 interface PhonesGridProps {
   initialPage?: number
   itemsPerPage?: number
-  onLoadingChange?: (isLoading: boolean) => void;
+  onLoadingChange?: (isLoading: boolean) => void
 }
 const PhonesGrid: React.FC<PhonesGridProps> = ({
-  initialPage = 1,
-  itemsPerPage = 21,
-  onLoadingChange
+  initialPage = 0,
+  onLoadingChange,
 }) => {
   const [phones, setPhones] = useState<Phones[]>([])
   const [loading, setLoading] = useState(true)
@@ -21,32 +22,56 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
   const [searchQuery, setSearchQuery] = useState('')
   const navigate = useNavigate()
 
-  useEffect(() => {
-    const fetchPhones = async () => {
+  const fetchPhones = useCallback(
+    async (page: number) => {
       try {
         setLoading(true)
-        if (onLoadingChange) onLoadingChange(true);
-        const data = await getPhones(page, itemsPerPage, searchQuery)
-        const uniquePhones = data.filter(
-          (phone, index, self) =>
-            index === self.findIndex((p) => p.id === phone.id)
-        )
-        setPhones(uniquePhones)
+        if (onLoadingChange) onLoadingChange(true)
+
+        let fetchedPhones: Phones[] = []
+        const seenIds = new Set<string>()
+        let currentPage = page
+
+        while (fetchedPhones.length < 20) {
+          const data = await getPhones(currentPage, searchQuery)
+
+          const uniqueNewPhones = data.filter((phone) => {
+            if (seenIds.has(phone.id)) {
+              return false
+            }
+            seenIds.add(phone.id)
+            return true
+          })
+
+          fetchedPhones = [...fetchedPhones, ...uniqueNewPhones]
+
+          // Si no hay más productos disponibles en la API, salir del bucle
+          if (data.length < 20) break
+
+          // Avanzar de página para traer más productos si faltan
+          currentPage++
+        }
+
+        setPhones(fetchedPhones.slice(0, 20)) // Garantizar que sean exactamente 20 productos
         setError(null)
       } catch {
         setPhones([])
         setError('Error fetching phones')
       } finally {
         setLoading(false)
-        if (onLoadingChange) onLoadingChange(false);
+        if (onLoadingChange) onLoadingChange(false)
       }
-    }
+    },
+    [searchQuery, onLoadingChange]
+  )
 
-    fetchPhones()
-  }, [page, itemsPerPage, searchQuery, onLoadingChange])
+  useEffect(() => {
+    setPhones([])
+    fetchPhones(page)
+  }, [page, fetchPhones])
 
   const handlePreviousPage = () => {
-    if (page > 1) {
+    if (page > 0) {
       setPage(page - 1)
     }
   }
@@ -57,7 +82,8 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value)
-    setPage(1)
+    setPage(0)
+    setPhones([])
   }
 
   return (
@@ -67,11 +93,11 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
           type="text"
           value={searchQuery}
           onChange={handleSearchChange}
-          placeholder="Search by name or brand..."
+          placeholder="Search for smartphone..."
           className="search-input"
         />
         <p className="results-count">
-          {loading ? 'Loading...' : `${phones.length} results found`}
+          {loading ? 'Loading...' : `${phones.length} RESULTS`}
         </p>
       </div>
 
@@ -81,31 +107,39 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
         <p className="empty-text">No phones found</p>
       )}
 
-      <div className="grid">
-        {phones.map((phone) => (
-          <div
-            key={phone.id}
-            className="card"
-            onClick={() => navigate(`/phone/${phone.id}`)}
-          >
-            <img src={phone.imageUrl} alt={phone.name} className="image" />
-            <p className="brand">{phone.brand}</p>
-            <h3 className="title">{phone.name}</h3>
-            <p className="price">${phone.basePrice}</p>
-          </div>
-        ))}
+<div className="grid">
+  {phones.map((phone) => (
+    <div
+      key={phone.id} // Usar phone.id como key
+      className="card"
+      onClick={() => navigate(`/phone/${phone.id}`)}
+    >
+      <img src={phone.imageUrl} alt={phone.name} className="image" />
+      <div className="text-container">
+        <p className="brand">{phone.brand}</p>
+        <div className="title">
+          <span className="name">{phone.name}</span> 
+          <span className="price">{phone.basePrice} EUR</span> 
+        </div>
       </div>
+    </div>
+  ))}
+</div>
 
       <div className="button-container">
         <button
           className="button"
-          disabled={page === 1}
+          disabled={page === 0}
           onClick={handlePreviousPage}
         >
-          Previous
+          <RiArrowLeftSLine />
         </button>
-        <button className="button" onClick={handleNextPage}>
-          Next
+        <button
+          className="button"
+          disabled={phones.length < 20}
+          onClick={handleNextPage}
+        >
+          <RiArrowRightSLine />
         </button>
       </div>
     </div>

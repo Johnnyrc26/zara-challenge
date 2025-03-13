@@ -1,23 +1,85 @@
 .specs {
   margin-top: 2rem;
-  color:black
+  color: #000000;
+  padding: 1rem;
+}
+
+.specsification {
+  font-weight: 600;
+  text-transform: uppercase;
+  padding-top: 1rem;
 }
 
 .specs h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 200;
+  color: #000000;
+  font-family: 'Helvetica', sans-serif;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
 }
 
 .specs ul {
   list-style: none;
   padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .specs li {
-  margin-bottom: 0.5rem;
+  display: flex;
+  font-size: 0.875rem;
+  font-family: 'Helvetica', sans-serif;
+  justify-content: space-between;
+}
+
+
+
+.specs li:not(:last-child) {
+  border-bottom: 1px solid #d1d5db; 
+  padding-top: 1rem;
+}
+
+.specs li strong {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.specs li span {
+  text-align: right;
+  max-width: 70%;
+  padding-bottom: 1rem ;
+  padding-top: 1rem ;
 }
 
 .specs .selected {
   font-weight: bold;
   color: #10b981; /* green-500 */
+}
+
+@media (max-width: 768px) {
+  .specs {
+    padding: 0.5rem;
+  }
+
+  .specs h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .specs li {
+    font-size: 0.75rem;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .specs li:not(:last-child) {
+    border-bottom: 1px solid #d1d5db;
+    padding-bottom: 0.5rem;
+  }
+
+  .specs li span {
+    text-align: left;
+    max-width: 100%;
+  }
 }
