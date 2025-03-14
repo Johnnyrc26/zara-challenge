@@ -4,7 +4,7 @@ import { getPhoneById, Phone } from '../api/phoneService'
 import BackButton from '../components/Detail/BackButton/BackButton'
 import Details from '../components/Detail/Details/Details'
 import Specifications from '../components/Detail/Specifications/Specifications'
-// import CarouselPhones from '../components/Detail/CarruselPhones/CarruselPhones'
+import CarouselPhones from '../components/Detail/CarruselPhones/CarruselPhones'
 
 const PhoneDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>()
@@ -50,7 +50,7 @@ const PhoneDetail: React.FC = () => {
           onAddToCart={() => navigate('/cart')}
         />
         <Specifications phone={phone} selectedStorage={selectedStorage} />
-        {/* <CarouselPhones similarProducts={phone.similarProducts} /> */}
+        <CarouselPhones similarProducts={phone.similarProducts} />
       </div>
     </div>
   )

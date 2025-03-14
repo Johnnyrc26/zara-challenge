@@ -6,15 +6,17 @@
   margin: 0 auto;
   flex-direction: row;
   padding: 5rem;
+  justify-content: center;
 }
 
 .phone-image img {
-  width: 100%; /* Ocupa el 100% del contenedor padre */
-  height: auto; /* Mantiene las proporciones */
-  max-width: 100%; /* Limita el ancho máximo al contenedor */
-  object-fit: contain; /* Asegura que la imagen se ajuste sin distorsionar */
-  display: block; /* Elimina cualquier espacio adicional debajo */
-  margin: 0 auto; /* Centra la imagen horizontalmente */
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  margin-top: 0.5rem;
 }
 
 .phone-info {
@@ -32,8 +34,6 @@
 .price {
   font-size: 1rem;
   font-weight: 200;
-  margin-bottom: 3rem;
-  color: #000000;
 }
 
 .selectors {
@@ -107,9 +107,9 @@
   display: flex;
   gap: 0.5rem;
 }
+
 .storage-options {
   display: flex;
- 
 }
 
 .color-button.selected {
@@ -143,7 +143,7 @@
   cursor: not-allowed;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 675px) {
   .phone-detail {
     flex-direction: column;
     gap: 1rem;
@@ -151,9 +151,10 @@
   }
 
   .phone-image img {
-    max-width: 50%; /* Asegura que la imagen no exceda el contenedor */
     margin: 0 auto;
     display: block;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
   .phone-info {
@@ -180,13 +181,16 @@
     text-align: left;
     font-size: 0.9rem;
   }
+
   .color-label {
     text-align: left;
     font-size: 0.9rem;
   }
+
   .storage-options {
     justify-content: start;
   }
+
   .color-options {
     justify-content: start;
   }
@@ -194,6 +198,7 @@
   .storage-button {
     padding: 1rem 2rem;
   }
+
   .color-button {
     padding: 1rem 1rem;
     font-size: 0.875rem;
@@ -206,28 +211,60 @@
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 676px) and (max-width: 847px) {
   .phone-detail {
     flex-direction: row;
-    gap: 5rem;
-    padding: 1rem;
+    gap: 1rem;
+    padding: 0.5rem;
+    justify-content: space-between;
+  }
+
+  .phone-image {
+    flex: 1;
+    max-width: 250px;
   }
 
   .phone-image img {
-    max-width: 400px; /* Restaura el límite máximo en escritorio */
+    max-width: 100%;
+    margin-bottom: 1.5rem;
   }
 
   .phone-info {
-    width: 500px;
+    flex: 1;
+    max-width: 300px;
+    width: auto;
   }
 
-  .phone-info h3,
-  .price {
+  .phone-info h3 {
+    font-size: 1.5rem;
     text-align: left;
   }
+
+  .price {
+    font-size: 0.875rem;
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+
+  .storage-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .color-button {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .add-to-cart-button {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+
   .color {
     align-items: flex-start;
   }
+
   .storage {
     align-items: flex-start;
   }
@@ -235,6 +272,120 @@
   .color-options {
     justify-content: flex-start;
   }
+
+  .storage-options {
+    justify-content: flex-start;
+  }
+}
+
+@media (min-width: 628px) and (max-width: 1024px) {
+  .phone-detail {
+    flex-direction: row;
+    gap: 3rem;
+    padding: 1rem;
+    justify-content: center;
+  }
+
+  .phone-image {
+    flex: none;
+    max-width: 350px;
+  }
+
+  .phone-image img {
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .phone-info {
+    flex: none;
+    width: 400px;
+  }
+
+  .phone-info h3 {
+    font-size: 1.75rem;
+    text-align: left;
+  }
+
+  .price {
+    font-size: 0.875rem;
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+
+  .storage-button {
+    padding: 1rem 2rem;
+    font-size: 0.875rem;
+  }
+
+  .color-button {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .add-to-box-button {
+    padding: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .color {
+    align-items: flex-start;
+  }
+
+  .storage {
+    align-items: flex-start;
+  }
+
+  .color-options {
+    justify-content: flex-start;
+  }
+
+  .storage-options {
+    justify-content: flex-start;
+  }
+}
+
+@media (min-width: 1025px) {
+  .phone-detail {
+    flex-direction: row;
+    gap: 5rem;
+    padding: 1rem;
+  }
+
+  .phone-image {
+    flex: none;
+  }
+
+  .phone-image img {
+    max-width: 400px;
+  }
+
+  .phone-info {
+    width: 500px;
+    max-width: none;
+  }
+
+  .phone-info h3 {
+    font-size: 2rem;
+    text-align: left;
+  }
+
+  .price {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .color {
+    align-items: flex-start;
+  }
+
+  .storage {
+    align-items: flex-start;
+  }
+
+  .color-options {
+    justify-content: flex-start;
+  }
+
   .storage-options {
     justify-content: flex-start;
   }

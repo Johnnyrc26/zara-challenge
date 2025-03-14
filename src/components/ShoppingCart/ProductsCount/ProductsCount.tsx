@@ -8,7 +8,7 @@ interface ProductsCountProps {
 const ProductsCount: React.FC<ProductsCountProps> = ({ count }) => {
   return (
     <div className="products-count">
-      {count} {count === 1 ? 'item' : 'items'} in cart
+     <span>CART ({count}{count === 1}) </span>
     </div>
   );
 };

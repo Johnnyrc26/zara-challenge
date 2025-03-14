@@ -110,7 +110,7 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
 <div className="grid">
   {phones.map((phone) => (
     <div
-      key={phone.id} // Usar phone.id como key
+      key={phone.id}
       className="card"
       onClick={() => navigate(`/phone/${phone.id}`)}
     >
@@ -131,13 +131,14 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
           className="button"
           disabled={page === 0}
           onClick={handlePreviousPage}
+          aria-label='Previous Page'
         >
           <RiArrowLeftSLine />
         </button>
         <button
           className="button"
           disabled={phones.length < 20}
-          onClick={handleNextPage}
+          onClick={handleNextPage}aria-label='Next Page'
         >
           <RiArrowRightSLine />
         </button>

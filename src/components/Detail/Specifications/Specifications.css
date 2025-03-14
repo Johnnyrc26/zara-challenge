@@ -30,7 +30,9 @@
   display: flex;
   font-size: 0.875rem;
   font-family: 'Helvetica', sans-serif;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 1rem;
+  align-items: center;
 }
 
 
@@ -40,46 +42,15 @@
   padding-top: 1rem;
 }
 
-.specs li strong {
-  font-weight: 600;
-  text-transform: uppercase;
+.specs li span {
+text-align: left;
 }
 
 .specs li span {
-  text-align: right;
-  max-width: 70%;
+  text-align: left;
+  
+  min-width: 40%;
   padding-bottom: 1rem ;
   padding-top: 1rem ;
 }
 
-.specs .selected {
-  font-weight: bold;
-  color: #10b981; /* green-500 */
-}
-
-@media (max-width: 768px) {
-  .specs {
-    padding: 0.5rem;
-  }
-
-  .specs h3 {
-    font-size: 1.25rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .specs li {
-    font-size: 0.75rem;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .specs li:not(:last-child) {
-    border-bottom: 1px solid #d1d5db;
-    padding-bottom: 0.5rem;
-  }
-
-  .specs li span {
-    text-align: left;
-    max-width: 100%;
-  }
-}

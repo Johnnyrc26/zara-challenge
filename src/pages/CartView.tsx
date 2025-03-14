@@ -15,9 +15,6 @@ const CartView: React.FC = () => {
   return (
     <div className="cart-view-container">
       <ProductsCount count={getTotalItems()} />
-      {cart.length === 0 ? (
-        <p>No items in cart</p>
-      ) : (
         <div className="cart-items">
           {cart.map((item, index) => (
             <Product
@@ -27,7 +24,6 @@ const CartView: React.FC = () => {
             />
           ))}
         </div>
-      )}
       <Buttons totalPrice={totalPrice} />
     </div>
   )

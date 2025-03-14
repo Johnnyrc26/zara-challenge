@@ -38,7 +38,7 @@ const Details: React.FC<DetailsProps> = ({
     if (selectedColor && selectedStorage) {
       addToCart({
         id: phone.id,
-        name: `${phone.name} (${selectedStorage}, ${selectedColor})`,
+        name: `${phone.name}`,
         quantity: 1,
         price: totalPrice,
         imageUrl: selectedColorOption?.imageUrl || phone.imageUrl,

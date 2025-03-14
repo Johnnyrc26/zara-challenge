@@ -26,7 +26,7 @@ const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
   return (
     <nav className="navbar">
      <div className="navbar-icon" onClick={handleHomeClick}>
-        <img src="/public/MBST.png" alt="Home" className="home-icon" />
+        <img src="/MBST.png" alt="Home" className="home-icon" />
       </div>
       {!isCartView && (
         <div className="navbar-icon cart-container" onClick={handleShoppingCart}>

@@ -13,48 +13,48 @@ const Specifications: React.FC<SpecificationsProps> = ({ phone }) => {
       <h3>SPECIFICATIONS</h3>
       <ul>
         <li>
-          <span className='specsification'>BRAND</span >
-          <span >{phone.brand || 'N/A'}</span>
+          <span>BRAND</span >
+          <p >{phone.brand || 'N/A'}</p>
         </li>
         <li>
           <span>NAME</span>
-          <span>{phone.name || 'N/A'}</span>
+          <p>{phone.name || 'N/A'}</p>
         </li>
         <li>
           <span>DESCRIPTION</span>
-          <span>{phone.description || 'N/A'}</span>
+          <p>{phone.description || 'N/A'}</p>
         </li>
         <li>
           <span>SCREEN</span>
-          <span>{phone.specs.screen || 'N/A'}</span>
+          <p>{phone.specs.screen || 'N/A'}</p>
         </li>
         <li>
           <span>RESOLUTION</span>
-          <span>{phone.specs.resolution || 'N/A'}</span>
+          <p>{phone.specs.resolution || 'N/A'}</p>
         </li>
         <li>
           <span>PROCESSOR</span>
-          <span>{phone.specs.processor || 'N/A'}</span>
+          <p>{phone.specs.processor || 'N/A'}</p>
         </li>
         <li>
           <span>MAIN CAMERA</span>
-          <span>{phone.specs.mainCamera || 'N/A'}</span>
+          <p>{phone.specs.mainCamera || 'N/A'}</p>
         </li>
         <li>
           <span>SELFIE CAMERA</span>
-          <span>{phone.specs.selfieCamera || 'N/A'}</span>
+          <p>{phone.specs.selfieCamera || 'N/A'}</p>
         </li>
         <li>
           <span>BATTERY</span>
-          <span>{phone.specs.battery || 'N/A'}</span>
+          <p>{phone.specs.battery || 'N/A'}</p>
         </li>
         <li>
           <span>OS</span>
-          <span>{phone.specs.os || 'N/A'}</span>
+          <p>{phone.specs.os || 'N/A'}</p>
         </li>
         <li>
           <span>SCREEN REFRESH RATE</span>
-          <span>{phone.specs.screenRefreshRate || 'N/A'}</span>
+          <p>{phone.specs.screenRefreshRate || 'N/A'}</p>
         </li>
       </ul>
     </div>

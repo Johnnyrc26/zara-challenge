@@ -21,7 +21,6 @@ export const useCartStore = create<CartStore>((set, get) => ({
   cart: [],
   addToCart: (item) => {
     set((state) => {
-      // Buscamos un item existente con el mismo id, color y capacity
       const existingItem = state.cart.find(
         (cartItem) =>
           cartItem.id === item.id &&
@@ -30,7 +29,6 @@ export const useCartStore = create<CartStore>((set, get) => ({
       )
 
       if (existingItem) {
-        // Si existe, incrementamos la cantidad
         return {
           cart: state.cart.map((cartItem) =>
             cartItem.id === item.id &&
@@ -41,7 +39,6 @@ export const useCartStore = create<CartStore>((set, get) => ({
           ),
         }
       } else {
-        // Si no existe, añadimos un nuevo item con quantity: 1
         return { cart: [...state.cart, { ...item, quantity: 1 }] }
       }
     })
