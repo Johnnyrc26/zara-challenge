@@ -6,7 +6,7 @@ const Layout: React.FC = () => {
   return (
     <div>
       <Navbar />
-      <Outlet /> {/* Renderiza las rutas hijas */}
+      <Outlet /> 
     </div>
   );
 };

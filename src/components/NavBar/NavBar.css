@@ -26,7 +26,7 @@
   position: absolute;
   top: -8px;
   right: -8px;
-  background-color: #ef4444; /* Rojo */
+  background-color: #ef4444; 
   color: white;
   border-radius: 50%;
   width: 1.2rem;
@@ -38,21 +38,29 @@
 }
 
 .cart-icon {
-  font-size: 24px; /* Tamaño del ícono SlBag */
-  color: #000000; /* Color del ícono, ajustable */
+  font-size: 24px; 
+  color: #000000; 
+}
+
+.navbar-icon {
+  cursor: pointer;
 }
 
 .cart-badge {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: transparent; /* Rojo para el badge */
+  background-color: transparent; 
   color: black;
   border-radius: 50%;
   padding: 1.8rem 0.5rem;
   font-size: 1rem;
   min-width: 1rem;
   height: 1rem;
+}
+
+.cart-container {
+  cursor: pointer;
 }
 
 @media (min-width: 640px) {

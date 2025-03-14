@@ -1,8 +1,6 @@
 
 .container {
-  width: 92%;
   padding: 1rem;
-
 }
 
 .loading-text,
@@ -19,9 +17,6 @@
 }
 
 @media (min-width: 640px) {
-  .container{
-    width: 98%;
-  }
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }

@@ -1,10 +1,15 @@
 import React from 'react'
-import { Phone } from '../../../api/phoneService'
 import { useNavigate } from 'react-router-dom'
-import './CarruselPhones.css'
+import './CarouselPhones.css'
 
 interface CarouselPhonesProps {
-  similarProducts: Phone[]
+  similarProducts: {
+    id: string;
+    brand: string;
+    name: string;
+    basePrice: number;
+    imageUrl: string;
+  }[],
 }
 
 const CarouselPhones: React.FC<CarouselPhonesProps> = ({ similarProducts }) => {

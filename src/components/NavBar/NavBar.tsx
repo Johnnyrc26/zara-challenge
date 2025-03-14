@@ -6,7 +6,7 @@ import { SlBag } from 'react-icons/sl';
 import './Navbar.css'
 
 interface NavbarProps {
-  isLoading?: boolean // Prop opcional para mostrar la barra de carga
+  isLoading?: boolean 
 }
 
 const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
@@ -34,7 +34,7 @@ const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
          <span className="cart-badge">{cartCount}</span>
         </div>
       )}
-      {isLoading && <div className="loading-bar"></div>}
+      {isLoading && <div className="loading-bar" data-testid="loading-bar"></div>}
     </nav>
   )
 }

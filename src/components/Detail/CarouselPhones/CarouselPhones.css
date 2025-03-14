@@ -1,9 +1,9 @@
 .similar-products {
   color: #000000;
   padding: 1rem;
-  overflow-x: hidden; /* Evita desbordamientos que afecten a otros componentes */
-  width: 99%; /* Igual que .container en móvil */
-  margin: 0 auto; /* Centra el contenedor */
+  overflow-x: hidden; 
+  width: 99%; 
+  margin: 0 auto; 
   flex-wrap: nowrap;
   align-items: center;
 }
@@ -24,36 +24,37 @@
   cursor: pointer;
   background-color: #fff;
   display: flex;
-  flex-direction: row; /* Fila horizontal por defecto */
-  flex-wrap: nowrap; /* Evita que las tarjetas se envuelvan */
-  overflow-x: auto; /* Habilita el scroll horizontal por defecto */
-  box-sizing: border-box; /* Incluye padding en el ancho total */
+  justify-self: anchor-center;
+  flex-direction: row; 
+  flex-wrap: nowrap; 
+  overflow-x: auto; 
+  box-sizing: border-box; 
 }
 
 
 .carousel-item {
-  flex: 0 0 auto; /* Las tarjetas no se estiran */
-  width: 200px; /* Ancho base para desktop */
+  flex: 0 0 auto; 
+  width: 200px; 
   text-align: center;
-  border-right: 1px solid #d1d5db; /* Línea divisoria entre tarjetas */
+  border-right: 1px solid #d1d5db; 
 }
 
-/* Última tarjeta sin borde derecho */
+
 .carousel-item:last-child {
   border-right: none;
 }
 
 .carousel::-webkit-scrollbar {
-  display: none; /* Oculta el scrollbar */
+  display: none; 
 }
 
 .carousel-item p {
   margin: 0.25rem 0;
 }
 
-/* Opcional: Estilo para el scrollbar (para navegadores Webkit como Chrome/Safari) */
+
 .carousel::-webkit-scrollbar {
-  height: 8px; /* Para scroll horizontal */
+  height: 8px; 
 }
 
 .carousel::-webkit-scrollbar-track {
@@ -88,28 +89,28 @@
   }
 
   .carousel-item {
-    width: 150px; /* Ancho reducido en móvil */
-    border-right: none; /* Sin línea divisoria en vertical */
-    border-bottom: 1px solid #d1d5db; /* Línea divisoria vertical entre productos */
-    margin: 0 auto; /* Centra cada tarjeta */
+    width: 150px; 
+    border-right: none; 
+    border-bottom: 1px solid #d1d5db; 
+    margin: 0 auto; 
   }
 
 
-  /* Última tarjeta sin borde inferior */
+  
   .carousel-item:last-child {
     border-bottom: none;
   }
 
   .carousel::-webkit-scrollbar {
-    display: none; /* Oculta el scrollbar vertical en móvil */
+    display: none; 
   }
 }
 
-/* Media Query para pantallas intermedias (676px a 847px) */
+
 @media (min-width: 660px) and (max-width: 797px) {
   .similar-products {
     padding: 0.75rem;
-    width: 99%; /* Igual que .container en tablets */
+    width: 99%; 
     flex-wrap: nowrap;
   }
 
@@ -125,14 +126,14 @@
   }
 
   .carousel-item {
-    width: 200px; /* Ancho base para tablets */
+    width: 200px; 
   }
 }
 
 @media (min-width: 800px) and (max-width: 1024px) {
   .similar-products {
     padding: 1rem;
-    width:99%; /* Igual que .container en tablets */
+    width:99%; 
     flex-wrap: nowrap;
   }
 
@@ -152,7 +153,7 @@
   }
 }
 
-/* Media Query para pantallas grandes (a partir de 1025px) */
+
 @media (min-width: 1025px) {
   .similar-products {
     padding: 0.5rem 0;

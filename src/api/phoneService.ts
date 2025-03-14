@@ -18,20 +18,22 @@ export interface Phone {
     os: string
     screenRefreshRate: string
   }
-  colorOptions: [
-    {
-      name: string
-      hexCode: string
-      imageUrl: string
-    },
-  ]
-  storageOptions: [
-    {
-      capacity: string
-      price: number
-    },
-  ]
-  similarProducts: Phone[]
+  colorOptions: {
+    name: string;
+    hexCode: string;
+    imageUrl: string;
+  }[],
+  storageOptions: {
+    capacity: string;
+    price: number;
+  }[],
+  similarProducts: {
+    id: string;
+    brand: string;
+    name: string;
+    basePrice: number;
+    imageUrl: string;
+  }[],
 }
 
 export interface Phones {

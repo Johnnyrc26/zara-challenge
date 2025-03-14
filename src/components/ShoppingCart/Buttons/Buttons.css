@@ -6,12 +6,15 @@
   margin-top: 2rem;
   gap: 1rem;
   flex-wrap: wrap;
-  align-items: center;
+  position: absolute;
+  bottom: 1rem;
+  width: 98vw;
+  background: white;
 }
 
 .continue-button {
   padding: 0.75rem 1.5rem;
-  background-color: #ffffff; /* gray-500 */
+  background-color: #ffffff; 
   color: rgb(0, 0, 0);
   border: none;
 border: black 0.5px solid;
@@ -19,7 +22,7 @@ border: black 0.5px solid;
 }
 
 .continue-button:hover {
-  background-color: #f6f6f6; /* gray-600 */
+  background-color: #f6f6f6; 
 }
 
 .total-and-pay {
@@ -38,18 +41,18 @@ border: black 0.5px solid;
 
 .pay-button {
   padding: 0.75rem 1.5rem;
-  background-color: #1B1A18; /* green-500 */
+  background-color: #1B1A18; 
   color: white;
   border: none;
   cursor: pointer;
 }
 
 .pay-button:hover {
-  background-color: #059669; /* green-600 */
+  background-color: #059669; 
 }
 
 .pay-button:disabled {
-  background-color: #d1d5db; /* gray-300 */
+  background-color: #d1d5db; 
   opacity: 0.5;
   cursor: not-allowed;
 }

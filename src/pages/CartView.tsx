@@ -1,5 +1,6 @@
 import React from 'react'
 import { useCartStore } from '../store/cartStore'
+import './CartView.css'
 import ProductsCount from '../components/ShoppingCart/ProductsCount/ProductsCount'
 import Product from '../components/ShoppingCart/Product/Product'
 import Buttons from '../components/ShoppingCart/Buttons/Buttons'

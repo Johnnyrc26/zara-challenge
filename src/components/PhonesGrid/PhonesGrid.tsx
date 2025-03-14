@@ -45,14 +45,14 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
 
           fetchedPhones = [...fetchedPhones, ...uniqueNewPhones]
 
-          // Si no hay más productos disponibles en la API, salir del bucle
+          
           if (data.length < 20) break
 
-          // Avanzar de página para traer más productos si faltan
+          
           currentPage++
         }
 
-        setPhones(fetchedPhones.slice(0, 20)) // Garantizar que sean exactamente 20 productos
+        setPhones(fetchedPhones.slice(0, 20)) 
         setError(null)
       } catch {
         setPhones([])

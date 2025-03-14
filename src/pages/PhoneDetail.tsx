@@ -4,7 +4,7 @@ import { getPhoneById, Phone } from '../api/phoneService'
 import BackButton from '../components/Detail/BackButton/BackButton'
 import Details from '../components/Detail/Details/Details'
 import Specifications from '../components/Detail/Specifications/Specifications'
-import CarouselPhones from '../components/Detail/CarruselPhones/CarruselPhones'
+import CarouselPhones from '../components/Detail/CarouselPhones/CarouselPhones'
 
 const PhoneDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>()

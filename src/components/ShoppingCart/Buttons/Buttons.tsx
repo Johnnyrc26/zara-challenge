@@ -14,7 +14,6 @@ const Buttons: React.FC<ButtonsProps> = ({ totalPrice }) => {
   }
 
   const handlePay = () => {
-    // Lógica de pago (a implementar)
     alert('Proceeding to payment...')
   }
 
