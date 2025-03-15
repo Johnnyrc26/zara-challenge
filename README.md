@@ -1,54 +1,114 @@
-# React + TypeScript + Vite
+# Zara Challenge - Frontend  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción  
+Este proyecto es una aplicación web diseñada para visualizar, buscar y gestionar un catálogo de teléfonos móviles. Permite a los usuarios consultar detalles específicos de cada dispositivo, así como añadirlos o eliminarlos del carrito de compras de manera sencilla.
 
-Currently, two official plugins are available:
+## Tecnologías Utilizadas  
+- **Framework:** React + Vite + TypeScript  
+- **Gestión de Estado:** Zustand + React Context API  
+- **Estilos:** CSS, SASS o StyledComponents  
+- **Autenticación:** API Key en los headers  
+- **Pruebas:** Jest + React Testing Library  
+- **Despliegue:** Netlify  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Estructura del Proyecto  
+```plaintext
+zara-challenge/
+│── public/                      
+│   ├── LOGO.svg
+│   ├── MBST.png
+│   ├── MBST.svg
+│
+│── src/                         
+│   ├── api/                     
+│   │   ├── test/                
+│   │   │   ├── get-phone-by-id.sh
+│   │   │   ├── get-phones.sh
+│   │   ├── apiClient.ts
+│   │   ├── phoneService.ts
+│   │
+│   ├── components/              
+│   │   ├── Detail/
+│   │   │   ├── backButton/
+│   │   │   ├── CarouselPhones/
+│   │   │   ├── Detail/
+│   │   │   ├── Specifications/
+│   │   ├── Layout/
+│   │   ├── NavBar/
+│   │   ├── PhonesGrid/
+│   │   ├── ShoppingCart/
+│   │   │   ├── Buttons/
+│   │   │   ├── Product/
+│   │   │   ├── ProductsCount/
+│   │
+│   ├── pages/                   
+│   │   ├── CartView.tsx
+│   │   ├── PhonesDetail.tsx
+│   │   ├── PhoneListHome.tsx
+│   │
+│   ├── store/                      
+│   │   ├── cartStore.ts
+│
+│   ├── styles/                     
+│   │   ├── index.css
+│
+│   ├── main.tsx                    
+│   ├── App.tsx                     
+│   ├── vite-env.d.ts               
+│
+│── .env 
+│── .eslintrc.cjs             
+│── .prettierrc               
+│── jest.config.ts            
+│── jest.setup.ts             
+│── vite.config.ts            
+│── tsconfig.json              
+│── package.json               
+│── README.md                  
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+## Instalación y Ejecución  
+### 1. Clonar el repositorio:  
+```sh
+git clone https://github.com/tu-usuario/zara-challenge.git
+cd zara-challenge
 ```
+
+### 2. Instalar dependencias:  
+```sh
+npm install
+```
+
+### 3. Configurar variables de entorno:  
+Crea un archivo `.env` en la raíz y añade:
+```sh
+VITE_API_BASE_URL=https://prueba-tecnica-api-tienda-moviles.onrender.com
+VITE_API_KEY=87909682e6cd74208f41a6ef39fe4191
+```
+
+### 4. Ejecutar en modo desarrollo:  
+```sh
+npm run dev
+```
+
+### 5. Construir para producción:  
+```sh
+npm run build
+```
+
+## Pruebas  
+Ejecutar los tests con Jest:  
+```sh
+npm test
+```
+
+##  Despliegue en Netlify  
+### 1. Conectar el repositorio en Netlify  
+### 2. Configurar variables de entorno en Netlify > Settings > Environment Variables  
+### 3. Especificar el comando de build:  
+```sh
+npm run build
+```
+
+### 4. Seleccionar la carpeta de salida `/dist`  
+### 5. Deploy!   

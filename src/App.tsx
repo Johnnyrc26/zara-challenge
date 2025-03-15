@@ -2,13 +2,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout/Layout'
 import HomePage from './pages/PhoneListHome'
 import DetailPage from './pages/PhoneDetail'
-import CartView from './pages/CartView';
-// import { CartProvider } from './context/CartContext';
+import CartView from './pages/CartView'
 
 function App() {
   return (
     <BrowserRouter>
-      {/* <CartProvider> */}
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<HomePage />} />
@@ -16,7 +14,6 @@ function App() {
           <Route path="/cart" element={<CartView />} />
         </Route>
       </Routes>
-      {/* </CartProvider> */}
     </BrowserRouter>
   )
 }
