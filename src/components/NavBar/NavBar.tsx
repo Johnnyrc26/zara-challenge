@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useCartStore } from '../../store/cartStore'
 import { SlBag } from 'react-icons/sl';
-import './Navbar.css'
+import './NavBar.css'
 
 interface NavbarProps {
   isLoading?: boolean 
