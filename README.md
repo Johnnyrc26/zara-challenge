@@ -111,4 +111,4 @@ npm run build
 ```
 
 ### 4. Seleccionar la carpeta de salida `/dist`  
-### 5. Deploy!   
+### 5. Deploy  [text](https://zara-challenge-frontdev.netlify.app/)!   
