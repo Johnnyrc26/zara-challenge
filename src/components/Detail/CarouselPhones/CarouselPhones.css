@@ -1,0 +1,179 @@
+.similar-products {
+  color: #000000;
+  padding: 1rem;
+  overflow-x: hidden; 
+  width: 99%; 
+  margin: 0 auto; 
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.similar-products h3 {
+  font-size: 1.5rem;
+  font-weight: 200;
+  color: #000000;
+  font-family: 'Helvetica', sans-serif;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+.carousel {
+  padding: 1rem;
+  text-align: center;
+  color: #000000;
+  cursor: pointer;
+  background-color: #fff;
+  display: flex;
+  justify-self: anchor-center;
+  flex-direction: row; 
+  flex-wrap: nowrap; 
+  overflow-x: auto; 
+  box-sizing: border-box; 
+}
+
+
+.carousel-item {
+  flex: 0 0 auto; 
+  width: 200px; 
+  text-align: center;
+  border-right: 1px solid #d1d5db; 
+}
+
+
+.carousel-item:last-child {
+  border-right: none;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none; 
+}
+
+.carousel-item p {
+  margin: 0.25rem 0;
+}
+
+
+.carousel::-webkit-scrollbar {
+  height: 8px; 
+}
+
+.carousel::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.carousel::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+@media (max-width: 660px) and (min-width: 320px) {
+  .similar-products {
+    padding: 0.5rem;
+    width: 99%; 
+    
+  }
+
+  .similar-products h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .carousel {
+    padding: 0.5rem 0.5rem;
+    width: 25rem;
+    max-width: 100%; 
+  }
+
+  .carousel-item {
+    width: 150px; 
+    border-right: none; 
+    border-bottom: 1px solid #d1d5db; 
+    margin: 0 auto; 
+  }
+
+
+  
+  .carousel-item:last-child {
+    border-bottom: none;
+  }
+
+  .carousel::-webkit-scrollbar {
+    display: none; 
+  }
+}
+
+
+@media (min-width: 660px) and (max-width: 797px) {
+  .similar-products {
+    padding: 0.75rem;
+    width: 99%; 
+    flex-wrap: nowrap;
+  }
+
+  .similar-products h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .carousel {
+    padding: 0.5rem 0.5rem;
+    width: 45rem;
+    max-width: 100%; 
+  }
+
+  .carousel-item {
+    width: 200px; 
+  }
+}
+
+@media (min-width: 800px) and (max-width: 1024px) {
+  .similar-products {
+    padding: 1rem;
+    width:99%; 
+    flex-wrap: nowrap;
+  }
+
+  .similar-products h3 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .carousel {
+    padding: 0.5rem 0.5rem;
+    width: 50rem; 
+    max-width: 100%;
+  }
+
+  .carousel-item {
+    width: 200px;
+  }
+}
+
+
+@media (min-width: 1025px) {
+  .similar-products {
+    padding: 0.5rem 0;
+    flex-wrap: nowrap;
+    width: 99%;
+  }
+
+  .similar-products h3 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .carousel {
+    padding: 1rem;
+    width: 65rem; 
+    max-width: 100%;
+
+  }
+
+  .carousel-item {
+    width: 200px;
+  }
+}

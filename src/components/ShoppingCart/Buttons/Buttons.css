@@ -1,0 +1,69 @@
+
+.cart-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+  position: absolute;
+  bottom: 1rem;
+  width: 98vw;
+  background: white;
+}
+
+.continue-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #ffffff; 
+  color: rgb(0, 0, 0);
+  border: none;
+border: black 0.5px solid;
+  cursor: pointer;
+}
+
+.continue-button:hover {
+  background-color: #f6f6f6; 
+}
+
+.total-and-pay {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.total-price {
+
+  font-weight: 200;
+  margin: 0;
+  color:black
+  
+}
+
+.pay-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #1B1A18; 
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.pay-button:hover {
+  background-color: #059669; 
+}
+
+.pay-button:disabled {
+  background-color: #d1d5db; 
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .cart-buttons {
+    flex-direction: column;
+  }
+
+  .total-and-pay {
+    flex-direction: column;
+    text-align: center;
+  }
+}

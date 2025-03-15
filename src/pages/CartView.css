@@ -1,0 +1,4 @@
+.cart-view-container {
+  height: 86vh;
+  overflow: auto;
+}

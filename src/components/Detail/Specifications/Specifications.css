@@ -1,0 +1,56 @@
+.specs {
+  margin-top: 2rem;
+  color: #000000;
+  padding: 1rem;
+}
+
+.specsification {
+  font-weight: 600;
+  text-transform: uppercase;
+  padding-top: 1rem;
+}
+
+.specs h3 {
+  font-size: 1.5rem;
+  font-weight: 200;
+  color: #000000;
+  font-family: 'Helvetica', sans-serif;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+.specs ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.specs li {
+  display: flex;
+  font-size: 0.875rem;
+  font-family: 'Helvetica', sans-serif;
+  justify-content: flex-start;
+  gap: 1rem;
+  align-items: center;
+}
+
+
+
+.specs li:not(:last-child) {
+  border-bottom: 1px solid #d1d5db; 
+  padding-top: 1rem;
+}
+
+.specs li span {
+text-align: left;
+}
+
+.specs li span {
+  text-align: left;
+  
+  min-width: 40%;
+  padding-bottom: 1rem ;
+  padding-top: 1rem ;
+}
+
