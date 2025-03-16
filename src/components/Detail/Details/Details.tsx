@@ -1,5 +1,5 @@
 import React from 'react'
-import { useCartStore } from '../../../store/cartStore'
+import { useCart } from '../../../store/context/useCart'
 import { Phone } from '../../../api/phoneService'
 import './Details.css'
 
@@ -20,7 +20,7 @@ const Details: React.FC<DetailsProps> = ({
   onColorChange,
   onAddToCart,
 }) => {
-  const { addToCart } = useCartStore()
+  const { addToCart } = useCart()
 
   const selectedColorOption = phone.colorOptions.find(
     (option) => option.name === selectedColor

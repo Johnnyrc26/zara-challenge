@@ -1,13 +1,15 @@
 import React from 'react'
-import { CartItem } from '../../../store/cartStore' // Ajusta según tu interfaz
+import { useCart } from '../../../store/context/useCart'
+import { CartItem } from '../../../types/cartTypes' 
 import './Product.css'
 
 interface ProductProps {
   item: CartItem
-  onRemove: () => void
 }
 
-const Product: React.FC<ProductProps> = ({ item, onRemove }) => {
+const Product: React.FC<ProductProps> = ({ item }) => {
+  const { removeFromCart } = useCart()
+
   return (
     <div className="cart-product">
       <img src={item.imageUrl} alt={item.name} className="product-image" />
@@ -20,7 +22,8 @@ const Product: React.FC<ProductProps> = ({ item, onRemove }) => {
         <div className='product-cart'>
           <p>{item.price} EUR</p>
           <p>Quantity: {item.quantity}</p>
-      <button className="remove-button" onClick={onRemove}>
+          <button className="remove-button" onClick={() => removeFromCart(item)}>
+
         Remove
       </button>
         </div>

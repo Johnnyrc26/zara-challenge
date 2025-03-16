@@ -55,7 +55,6 @@ export const useCartStore = create<CartStore>((set, get) => ({
   
       if (existingItem) {
         if (existingItem.quantity > 1) {
-          // Reducir la cantidad en 1
           return {
             cart: state.cart.map((cartItem) =>
               cartItem.id === item.id &&
@@ -66,7 +65,6 @@ export const useCartStore = create<CartStore>((set, get) => ({
             ),
           };
         } else {
-          // Eliminar el item si quantity es 1
           return {
             cart: state.cart.filter(
               (cartItem) =>
@@ -77,7 +75,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
           };
         }
       }
-      return { cart: state.cart }; // No hacer cambios si no existe el item
+      return { cart: state.cart }; 
     });
   },
   
