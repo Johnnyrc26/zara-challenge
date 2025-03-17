@@ -1,12 +1,12 @@
 import React from 'react'
-import { useCartStore } from '../store/cartStore'
+import { useCart } from '../store/context/useCart'
 import './CartView.css'
 import ProductsCount from '../components/ShoppingCart/ProductsCount/ProductsCount'
 import Product from '../components/ShoppingCart/Product/Product'
 import Buttons from '../components/ShoppingCart/Buttons/Buttons'
 
 const CartView: React.FC = () => {
-  const { cart, removeFromCart, getTotalItems } = useCartStore()
+  const { cart, getTotalItems } = useCart()
 
   const totalPrice = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -21,7 +21,6 @@ const CartView: React.FC = () => {
             <Product
               key={index}
               item={item}
-              onRemove={() => removeFromCart(item)}
             />
           ))}
         </div>

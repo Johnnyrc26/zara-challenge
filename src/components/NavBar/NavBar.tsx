@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { useCartStore } from '../../store/cartStore'
+import { useCart } from '../../store/context/useCart'
 import { SlBag } from 'react-icons/sl';
 import './NavBar.css'
 
@@ -9,7 +9,8 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
-  const cartCount = useCartStore((state) => state.getTotalItems())
+  const { getTotalItems } = useCart()
+  const cartCount = getTotalItems()
   const navigate = useNavigate()
   const location = useLocation()
 
