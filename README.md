@@ -6,7 +6,7 @@ Este proyecto es una aplicación web diseñada para visualizar, buscar y gestion
 ## Tecnologías Utilizadas  
 - **Framework:** React + Vite + TypeScript  
 - **Gestión de Estado:** Zustand + React Context API  
-- **Estilos:** CSS, SASS o StyledComponents  
+- **Estilos:** CSS
 - **Autenticación:** API Key en los headers  
 - **Pruebas:** Jest + React Testing Library  
 - **Despliegue:** Netlify  
