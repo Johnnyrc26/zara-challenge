@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { MemoryRouter, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { CartProvider } from '../../store/context/cartProvider';
 import NavBar from './NavBar';
 import { useCartStore } from '../../store/cartStore';
 
@@ -20,7 +21,7 @@ jest.mock('react-icons/sl', () => ({
 describe('Navbar Component', () => {
   const mockNavigate = jest.fn();
   const mockLocation = { pathname: '/' };
-  const mockCartCount = 3;
+  const mockCartCount = 0;
 
   beforeEach(() => {
     (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
@@ -36,9 +37,9 @@ describe('Navbar Component', () => {
 
   it('renderiza correctamente el ícono de home y el ícono del carrito', () => {
     render(
-      <MemoryRouter>
+      <CartProvider>
         <NavBar />
-      </MemoryRouter>
+      </CartProvider>
     );
 
     expect(screen.getByAltText('Home')).toBeInTheDocument();
@@ -48,9 +49,9 @@ describe('Navbar Component', () => {
 
   it('navega a la ruta de inicio al hacer clic en el ícono de home', () => {
     render(
-      <MemoryRouter>
+      <CartProvider>
         <NavBar />
-      </MemoryRouter>
+      </CartProvider>
     );
 
     fireEvent.click(screen.getByAltText('Home'));
@@ -59,9 +60,9 @@ describe('Navbar Component', () => {
 
   it('navega a la ruta del carrito al hacer clic en el ícono del carrito', () => {
     render(
-      <MemoryRouter>
+      <CartProvider>
         <NavBar />
-      </MemoryRouter>
+      </CartProvider>
     );
 
     fireEvent.click(screen.getByTestId('cart-icon'));
@@ -70,9 +71,9 @@ describe('Navbar Component', () => {
 
   it('muestra la barra de carga cuando isLoading es true', () => {
     render(
-      <MemoryRouter>
+      <CartProvider>
         <NavBar isLoading={true} />
-      </MemoryRouter>
+      </CartProvider>
     );
 
     expect(screen.getByTestId('loading-bar')).toBeInTheDocument();
@@ -82,9 +83,9 @@ describe('Navbar Component', () => {
     (useLocation as jest.Mock).mockReturnValue({ pathname: '/cart' });
 
     render(
-      <MemoryRouter>
+      <CartProvider>
         <NavBar />
-      </MemoryRouter>
+      </CartProvider>
     );
 
     expect(screen.queryByTestId('cart-icon')).not.toBeInTheDocument();

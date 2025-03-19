@@ -44,6 +44,13 @@ export interface Phones {
   imageUrl: string
 }
 
+const ensureHttps = (url: string): string => {
+  if (url.startsWith('http://')) {
+    return url.replace('http://', 'https://');
+  }
+  return url;
+}
+
 export const getPhones = async (
   page: number = 0,
   search: string = ''
@@ -65,7 +72,7 @@ export const getPhones = async (
         brand: phone.brand,
         name: phone.name,
         basePrice: phone.basePrice,
-        imageUrl: phone.imageUrl,
+        imageUrl: ensureHttps(phone.imageUrl),
       })
     )
   } catch (error) {

@@ -49,11 +49,18 @@ const Details: React.FC<DetailsProps> = ({
     }
   }
 
+  const ensureHttps = (url: string): string => {
+    if (url.startsWith('http://')) {
+      return url.replace('http://', 'https://');
+    }
+    return url;
+  }
+
   return (
     <div className="phone-detail">
       <div className="phone-image">
         <img
-          src={selectedColorOption?.imageUrl || phone.imageUrl}
+         src={ensureHttps(selectedColorOption?.imageUrl || phone.imageUrl)}
           alt={phone.name}
         />
       </div>

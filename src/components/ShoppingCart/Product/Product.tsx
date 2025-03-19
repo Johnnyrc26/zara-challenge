@@ -1,6 +1,6 @@
 import React from 'react'
 import { useCart } from '../../../store/context/useCart'
-import { CartItem } from '../../../types/cartTypes' 
+import { CartItem } from '../../../types/cartTypes'
 import './Product.css'
 
 interface ProductProps {
@@ -9,23 +9,35 @@ interface ProductProps {
 
 const Product: React.FC<ProductProps> = ({ item }) => {
   const { removeFromCart } = useCart()
+  const ensureHttps = (url: string): string => {
+    if (url.startsWith('http://')) {
+      return url.replace('http://', 'https://')
+    }
+    return url
+  }
 
   return (
     <div className="cart-product">
-      <img src={item.imageUrl} alt={item.name} className="product-image" />
+      <img
+        src={ensureHttps(item.imageUrl)}
+        alt={item.name}
+        className="product-image"
+      />
       <div className="product-info">
         <p>{item.name.toUpperCase()}</p>
         <div className="product-type">
-          <p>{item.capacity} |</p> 
+          <p>{item.capacity} |</p>
           <p>{item.color.toUpperCase()}</p>
         </div>
-        <div className='product-cart'>
+        <div className="product-cart">
           <p>{item.price} EUR</p>
           <p>Quantity: {item.quantity}</p>
-          <button className="remove-button" onClick={() => removeFromCart(item)}>
-
-        Remove
-      </button>
+          <button
+            className="remove-button"
+            onClick={() => removeFromCart(item)}
+          >
+            Remove
+          </button>
         </div>
       </div>
     </div>
