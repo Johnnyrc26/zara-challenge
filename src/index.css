@@ -7,14 +7,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
 
 body {
   margin: 0;
   place-items: center;
   overflow-x: hidden;
-
   padding: 1rem;
 }
 
@@ -23,8 +21,8 @@ body {
 }
 
 @media (max-width: 768px) {
-  body, #root {
-
+  body,
+  #root {
     overflow-x: hidden;
   }
 }

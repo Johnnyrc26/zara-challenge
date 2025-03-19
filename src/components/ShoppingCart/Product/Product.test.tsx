@@ -41,6 +41,6 @@ describe('Product Component', () => {
     render(<Product item={mockItem} />)
 
     fireEvent.click(screen.getByText('Remove'))
-    expect(mockRemoveFromCart).toHaveBeenCalledWith(mockItem.id)
+    expect(mockRemoveFromCart).toHaveBeenCalledWith(mockItem)
   })
 })

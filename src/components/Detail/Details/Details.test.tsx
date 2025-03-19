@@ -1,13 +1,14 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import Details from './Details';
-import { useCartStore } from '../../../store/cartStore';
+import { render, screen, fireEvent } from '@testing-library/react'
+import Details from './Details'
+import { useCartStore } from '../../../store/cartStore'
+import { CartProvider } from '../../../store/context/cartProvider'
 
 jest.mock('../../../store/cartStore', () => ({
   useCartStore: jest.fn(),
-}));
+}))
 
 describe('Details Component', () => {
-  const mockAddToCart = jest.fn();
+  const mockAddToCart = jest.fn()
   const mockPhone = {
     id: 'SNY-XPERIA1V',
     brand: 'SONY',
@@ -16,7 +17,8 @@ describe('Details Component', () => {
       'Descubre el diseño táctil funcional. En el Xperia 1 V, cada detalle, superficie, textura y forma se han tenido muy en cuenta para mejorar tu experiencia de usuario. Con su elegante acabado mate, los materiales del Xperia 1 V combinan el atractivo estético con un rendimiento en el mundo real impecable.',
     basePrice: 959.42,
     rating: 4.7,
-    imageUrl: 'http://prueba-tecnica-api-tienda-moviles.onrender.com/images/SNY-XPERIA1V.png',
+    imageUrl:
+      'http://prueba-tecnica-api-tienda-moviles.onrender.com/images/SNY-XPERIA1V.png',
     specs: {
       screen: '6.5" OLED 4K HDR',
       resolution: 'No especificado',
@@ -91,108 +93,119 @@ describe('Details Component', () => {
           'http://prueba-tecnica-api-tienda-moviles.onrender.com/images/XMI-R13C-navy-blue.png',
       },
     ],
-  };
+  }
 
   beforeEach(() => {
-    (useCartStore as unknown as jest.Mock).mockReturnValue({
+    ;(useCartStore as unknown as jest.Mock).mockReturnValue({
       addToCart: mockAddToCart,
-    });
-  });
+    })
+  })
 
   afterEach(() => {
-    jest.clearAllMocks();
-  });
+    jest.clearAllMocks()
+  })
 
   it('renderiza correctamente los detalles del teléfono', () => {
     render(
-      <Details
-        phone={mockPhone}
-        selectedStorage="256 GB"
-        selectedColor="Negro"
-        onStorageChange={jest.fn()}
-        onColorChange={jest.fn()}
-        onAddToCart={jest.fn()}
-      />
-    );
+      <CartProvider>
+        <Details
+          phone={mockPhone}
+          selectedStorage="256 GB"
+          selectedColor="Negro"
+          onStorageChange={jest.fn()}
+          onColorChange={jest.fn()}
+          onAddToCart={jest.fn()}
+        />
+      </CartProvider>
+    )
 
-    expect(screen.getByText('Xperia 1 V')).toBeInTheDocument();
-    expect(screen.getByText('From 1918.84 EUR')).toBeInTheDocument();
-    expect(screen.getByText('256 GB')).toBeInTheDocument();
-    expect(screen.getByTitle('Negro')).toBeInTheDocument();
-  });
+    expect(screen.getByText('Xperia 1 V')).toBeInTheDocument()
+    expect(screen.getByText('From 1918.84 EUR')).toBeInTheDocument()
+    expect(screen.getByText('256 GB')).toBeInTheDocument()
+    expect(screen.getByTitle('Negro')).toBeInTheDocument()
+  })
 
   it('cambia el almacenamiento al hacer clic en un botón', () => {
-    const mockOnStorageChange = jest.fn();
+    const mockOnStorageChange = jest.fn()
     render(
-      <Details
-        phone={mockPhone}
-        selectedStorage="256 GB"
-        selectedColor="Negro"
-        onStorageChange={mockOnStorageChange}
-        onColorChange={jest.fn()}
-        onAddToCart={jest.fn()}
-      />
-    );
+      <CartProvider>
+        <Details
+          phone={mockPhone}
+          selectedStorage="256 GB"
+          selectedColor="Negro"
+          onStorageChange={mockOnStorageChange}
+          onColorChange={jest.fn()}
+          onAddToCart={jest.fn()}
+        />
+      </CartProvider>
+    )
 
-    fireEvent.click(screen.getByText('256 GB'));
-    expect(mockOnStorageChange).toHaveBeenCalledWith('256 GB');
-  });
+    fireEvent.click(screen.getByText('256 GB'))
+    expect(mockOnStorageChange).toHaveBeenCalledWith('256 GB')
+  })
 
   it('cambia el color al hacer clic en un botón', () => {
-    const mockOnColorChange = jest.fn();
+    const mockOnColorChange = jest.fn()
     render(
-      <Details
-        phone={mockPhone}
-        selectedStorage="256 GB"
-        selectedColor="Negro"
-        onStorageChange={jest.fn()}
-        onColorChange={mockOnColorChange}
-        onAddToCart={jest.fn()}
-      />
-    );
+      <CartProvider>
+        <Details
+          phone={mockPhone}
+          selectedStorage="256 GB"
+          selectedColor="Negro"
+          onStorageChange={jest.fn()}
+          onColorChange={mockOnColorChange}
+          onAddToCart={jest.fn()}
+        />
+      </CartProvider>
+    )
 
-    fireEvent.click(screen.getByTitle('Negro'));
-    expect(mockOnColorChange).toHaveBeenCalledWith('Negro');
-  });
+    fireEvent.click(screen.getByTitle('Negro'))
+    expect(mockOnColorChange).toHaveBeenCalledWith('Negro')
+  })
 
   it('añade el producto al carrito cuando se hace clic en "AÑADIR"', () => {
-    const mockOnAddToCart = jest.fn();
+    const mockOnAddToCart = jest.fn()
     render(
-      <Details
-        phone={mockPhone}
-        selectedStorage="256 GB"
-        selectedColor="Negro"
-        onStorageChange={jest.fn()}
-        onColorChange={jest.fn()}
-        onAddToCart={mockOnAddToCart}
-      />
-    );
+      <CartProvider>
+        <Details
+          phone={mockPhone}
+          selectedStorage="256 GB"
+          selectedColor="Negro"
+          onStorageChange={jest.fn()}
+          onColorChange={jest.fn()}
+          onAddToCart={mockOnAddToCart}
+        />
+      </CartProvider>
+    )
 
-    fireEvent.click(screen.getByText('AÑADIR'));
+    fireEvent.click(screen.getByText('AÑADIR'))
     expect(mockAddToCart).toHaveBeenCalledWith({
       id: 'SNY-XPERIA1V',
       name: 'Xperia 1 V',
       quantity: 1,
-      price: 1918.84, 
-      imageUrl: 'http://prueba-tecnica-api-tienda-moviles.onrender.com/images/SNY-XPERIA1V-negro.png', 
+      price: 1918.84,
+      imageUrl:
+        'http://prueba-tecnica-api-tienda-moviles.onrender.com/images/SNY-XPERIA1V-negro.png',
       color: 'Negro',
       capacity: '256 GB',
-    });
-    expect(mockOnAddToCart).toHaveBeenCalled();
-  });
+    })
+    expect(mockOnAddToCart).toHaveBeenCalled()
+  })
 
   it('deshabilita el botón "AÑADIR" si no se selecciona almacenamiento o color', () => {
     render(
-      <Details
-        phone={mockPhone}
-        selectedStorage={null}
-        selectedColor=""
-        onStorageChange={jest.fn()}
-        onColorChange={jest.fn()}
-        onAddToCart={jest.fn()}
-      />
-    );
+      <CartProvider>
+        <Details
+          phone={mockPhone}
+          selectedStorage={null}
+          selectedColor=""
+          onStorageChange={jest.fn()}
+          onColorChange={jest.fn()}
+          onAddToCart={jest.fn()}
+        />
+      </CartProvider>
+    )
 
-    expect(screen.getByText('AÑADIR')).toBeDisabled();
-  });
-});
+    expect(screen.getByText('AÑADIR')).toBeDisabled()
+  })
+})
