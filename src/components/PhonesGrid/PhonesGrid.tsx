@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getPhones, Phones } from '../../api/phoneService'
-import { RiArrowLeftSLine, RiArrowRightSLine } from 'react-icons/ri'
+import { RiArrowLeftSLine, RiArrowRightSLine, RiHeartLine, RiHeartFill } from 'react-icons/ri'
 
 import './PhonesGrid.css'
 import './SearchBar.css'
@@ -20,7 +20,21 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
   const [error, setError] = useState<string | null>(null)
   const [page, setPage] = useState(initialPage)
   const [searchQuery, setSearchQuery] = useState('')
+  const [likedPhones, setLikedPhones] = useState<Set<string>>(new Set())
   const navigate = useNavigate()
+
+  const toggleLike = useCallback((phoneId: string, e: React.MouseEvent) => {
+    e.stopPropagation()
+    setLikedPhones(prev => {
+      const newLiked = new Set(prev)
+      if (newLiked.has(phoneId)) {
+        newLiked.delete(phoneId)
+      } else {
+        newLiked.add(phoneId)
+      }
+      return newLiked
+    })
+  }, [])
 
   const fetchPhones = useCallback(
     async (page: number) => {
@@ -107,24 +121,35 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
         <p className="empty-text">No phones found</p>
       )}
 
-<div className="grid">
-  {phones.map((phone) => (
-    <div
-      key={phone.id}
-      className="card"
-      onClick={() => navigate(`/phone/${phone.id}`)}
-    >
-      <img src={phone.imageUrl} alt={phone.name} className="image" />
-      <div className="text-container">
-        <p className="brand">{phone.brand}</p>
-        <div className="title">
-          <span className="name">{phone.name}</span> 
-          <span className="price">{phone.basePrice} EUR</span> 
-        </div>
+      <div className="grid">
+        {phones.map((phone) => (
+          <div
+            key={phone.id}
+            className="card"
+            onClick={() => navigate(`/phone/${phone.id}`)}
+          >
+            <img src={phone.imageUrl} alt={phone.name} className="image" />
+            <button 
+              className="like-button" 
+              onClick={(e) => toggleLike(phone.id, e)}
+              aria-label={likedPhones.has(phone.id) ? 'Remove from favorites' : 'Add to favorites'}
+            >
+              {likedPhones.has(phone.id) ? (
+                <RiHeartFill className="heart-icon filled" />
+              ) : (
+                <RiHeartLine className="heart-icon" />
+              )}
+            </button>
+            <div className="text-container">
+              <p className="brand">{phone.brand}</p>
+              <div className="title">
+                <span className="name">{phone.name}</span> 
+                <span className="price">{phone.basePrice} EUR</span> 
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
-  ))}
-</div>
 
       <div className="button-container">
         <button

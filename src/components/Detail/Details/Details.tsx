@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import { useCart } from '../../../store/context/useCart'
 import { Phone } from '../../../api/phoneService'
+import { RiHeartLine, RiHeartFill } from 'react-icons/ri'
 import './Details.css'
 
 interface DetailsProps {
@@ -21,6 +22,11 @@ const Details: React.FC<DetailsProps> = ({
   onAddToCart,
 }) => {
   const { addToCart } = useCart()
+  const [isLiked, setIsLiked] = useState(false)
+
+  const toggleLike = useCallback(() => {
+    setIsLiked(prev => !prev)
+  }, [])
 
   const selectedColorOption = phone.colorOptions.find(
     (option) => option.name === selectedColor
@@ -60,7 +66,7 @@ const Details: React.FC<DetailsProps> = ({
     <div className="phone-detail">
       <div className="phone-image">
         <img
-         src={ensureHttps(selectedColorOption?.imageUrl || phone.imageUrl)}
+          src={ensureHttps(selectedColorOption?.imageUrl || phone.imageUrl)}
           alt={phone.name}
         />
       </div>
@@ -103,13 +109,26 @@ const Details: React.FC<DetailsProps> = ({
             </div>
           </div>
         </div>
-        <button
-          className="add-to-cart-button"
-          onClick={handleAddToCart}
-          disabled={!selectedStorage || !selectedColor}
-        >
-          AÑADIR
-        </button>
+        <div className="action-buttons">
+          <button
+            className="add-to-cart-button"
+            onClick={handleAddToCart}
+            disabled={!selectedStorage || !selectedColor}
+          >
+            AÑADIR
+          </button>
+          <button 
+            className="detail-like-button" 
+            onClick={toggleLike}
+            aria-label={isLiked ? 'Remove from favorites' : 'Add to favorites'}
+          >
+            {isLiked ? (
+              <RiHeartFill className="detail-heart-icon filled" />
+            ) : (
+              <RiHeartLine className="detail-heart-icon" />
+            )}
+          </button>
+        </div>
       </div>
     </div>
   )

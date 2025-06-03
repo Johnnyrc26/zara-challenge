@@ -208,4 +208,43 @@ describe('Details Component', () => {
 
     expect(screen.getByText('AÑADIR')).toBeDisabled()
   })
+
+  it('muestra el botón de like y cambia su estado al hacer clic', () => {
+    render(
+      <CartProvider>
+        <Details
+          phone={mockPhone}
+          selectedStorage="256 GB"
+          selectedColor="Negro"
+          onStorageChange={jest.fn()}
+          onColorChange={jest.fn()}
+          onAddToCart={jest.fn()}
+        />
+      </CartProvider>
+    )
+
+    // Verificar que el botón de like está presente
+    const likeButton = screen.getByRole('button', { name: /add to favorites/i })
+    expect(likeButton).toBeInTheDocument()
+
+    // Verificar que inicialmente muestra el corazón vacío
+    const emptyHeart = screen.getByTestId('heart-icon')
+    expect(emptyHeart).toHaveClass('detail-heart-icon')
+    expect(emptyHeart).not.toHaveClass('filled')
+
+    // Hacer clic en el botón de like
+    fireEvent.click(likeButton)
+
+    // Verificar que ahora muestra el corazón lleno
+    const filledHeart = screen.getByTestId('heart-icon')
+    expect(filledHeart).toHaveClass('detail-heart-icon filled')
+
+    // Hacer clic de nuevo para quitar el like
+    fireEvent.click(likeButton)
+
+    // Verificar que vuelve a mostrar el corazón vacío
+    const emptyHeartAgain = screen.getByTestId('heart-icon')
+    expect(emptyHeartAgain).toHaveClass('detail-heart-icon')
+    expect(emptyHeartAgain).not.toHaveClass('filled')
+  })
 })

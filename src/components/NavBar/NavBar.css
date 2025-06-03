@@ -7,7 +7,14 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  overflow: hidden; 
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .navbar-image {
@@ -25,9 +32,10 @@
 .cart-badge {
   position: absolute;
   top: -8px;
-  right: -8px;
-  background-color: #ef4444; 
-  color: white;
+  right: -13px;
+  background-color: white; 
+  color: #1a1a1a;
+  border: 1px solid #1a1a1a;
   border-radius: 50%;
   width: 1.2rem;
   height: 1.2rem;
@@ -35,29 +43,43 @@
   align-items: center;
   justify-content: center;
   font-size: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.cart-badge.has-items {
+  background-color: #ef4444;
+  color: white;
+  border-color: #ef4444;
 }
 
 .cart-icon {
   font-size: 24px; 
   color: #000000; 
-}
-
-.navbar-icon {
   cursor: pointer;
 }
 
-.cart-badge {
+.account-icon {
+  font-size: 24px; 
+  color: #000000; 
+  cursor: pointer;
+}
+
+.navbar-icon:not(.disabled) {
+  cursor: pointer;
+}
+
+.navbar-icon.disabled {
+  cursor: default;
+}
+
+.cart-container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: transparent; 
-  color: black;
-  border-radius: 50%;
-  padding: 1.8rem 0.5rem;
-  font-size: 1rem;
-  min-width: 1rem;
-  height: 1rem;
 }
+
+
 
 .cart-container {
   cursor: pointer;
