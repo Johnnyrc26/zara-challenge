@@ -30,7 +30,7 @@
 
 .input-field:focus {
   outline: none;
-  border-color: #4a90e2;
+  border-color: #1a1a1a;
   box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
 }
 
@@ -62,7 +62,7 @@
 }
 
 .toggle-password:hover {
-  color: #4a90e2;
+  color: #1a1a1a;
 }
 
 .error-message {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useAuth} from '../../../store/hooks/useAuth'
 import { useNavigate } from 'react-router-dom';
 import Input from '../Input/input';
 import './form.css';
@@ -16,6 +17,7 @@ interface FormErrors {
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
+  const { signIn } = useAuth()
   const [formData, setFormData] = useState<FormData>({
     email: '',
     password: ''
@@ -74,21 +76,21 @@ const LoginForm: React.FC = () => {
     setErrors({});
 
     try {
-      // TODO: Implement actual login logic with your authentication service
-      console.log('Login attempt with:', formData);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // On successful login, redirect to home or dashboard
+      const { error, user } = await signIn(formData.email, formData.password);
+    
+      if (error || !user) {
+        setErrors({
+          general: 'Credenciales incorrectas o cuenta no existe.'
+        });
+        return;
+      }
+    
       navigate('/');
     } catch (error) {
       console.error('Login failed:', error);
       setErrors({
         general: 'Error al iniciar sesión. Verifica tus credenciales.'
       });
-    } finally {
-      setIsLoading(false);
     }
   };
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { getPhoneById, Phone } from '../api/phoneService'
+import { getPhoneById, Phone } from '../api/phones/phoneService'
 import BackButton from '../components/Detail/BackButton/BackButton'
 import Details from '../components/Detail/Details/Details'
 import Specifications from '../components/Detail/Specifications/Specifications'

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
-import { useCart } from '../../../store/context/useCart'
-import { Phone } from '../../../api/phoneService'
+import { useCartStore } from '../../../store/cartStore' 
+import { Phone } from '../../../api/phones/phoneService'
 import { RiHeartLine, RiHeartFill } from 'react-icons/ri'
 import './Details.css'
 
@@ -8,6 +8,7 @@ interface DetailsProps {
   phone: Phone
   selectedStorage: string | null
   selectedColor: string
+  imageUrl: string | null
   onStorageChange: (storage: string | null) => void
   onColorChange: (color: string) => void
   onAddToCart: () => void
@@ -17,15 +18,16 @@ const Details: React.FC<DetailsProps> = ({
   phone,
   selectedStorage,
   selectedColor,
+  imageUrl,
   onStorageChange,
   onColorChange,
   onAddToCart,
 }) => {
-  const { addToCart } = useCart()
+  const { addToCart, loading, error } = useCartStore() 
   const [isLiked, setIsLiked] = useState(false)
 
   const toggleLike = useCallback(() => {
-    setIsLiked(prev => !prev)
+    setIsLiked((prev) => !prev)
   }, [])
 
   const selectedColorOption = phone.colorOptions.find(
@@ -36,30 +38,29 @@ const Details: React.FC<DetailsProps> = ({
     (option) => option.capacity === selectedStorage
   )
 
+  const selectedImageUrl = selectedColorOption?.imageUrl || imageUrl || phone.imageUrl
+
   const totalPrice = selectedStorageOption
     ? phone.basePrice + selectedStorageOption.price
     : phone.basePrice
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (selectedColor && selectedStorage) {
-      addToCart({
-        id: phone.id,
-        name: `${phone.name}`,
-        quantity: 1,
-        price: totalPrice,
-        imageUrl: selectedColorOption?.imageUrl || phone.imageUrl,
-        color: selectedColorOption?.name || '',
-        capacity: selectedStorageOption?.capacity || '',
-      })
-      onAddToCart()
+      try {
+        await addToCart(phone.id, selectedColor, selectedStorage, selectedImageUrl) 
+        onAddToCart() 
+      } catch (err) {
+        console.error('Failed to add to cart:', err)
+        
+      }
     }
   }
 
   const ensureHttps = (url: string): string => {
     if (url.startsWith('http://')) {
-      return url.replace('http://', 'https://');
+      return url.replace('http://', 'https://')
     }
-    return url;
+    return url
   }
 
   return (
@@ -113,12 +114,12 @@ const Details: React.FC<DetailsProps> = ({
           <button
             className="add-to-cart-button"
             onClick={handleAddToCart}
-            disabled={!selectedStorage || !selectedColor}
+            disabled={!selectedStorage || !selectedColor || loading}
           >
-            AÑADIR
+            {loading ? 'AÑADIENDO...' : 'AÑADIR'}
           </button>
-          <button 
-            className="detail-like-button" 
+          <button
+            className="detail-like-button"
             onClick={toggleLike}
             aria-label={isLiked ? 'Remove from favorites' : 'Add to favorites'}
           >
@@ -129,6 +130,7 @@ const Details: React.FC<DetailsProps> = ({
             )}
           </button>
         </div>
+        {error && <p className="error-message">{error}</p>}
       </div>
     </div>
   )

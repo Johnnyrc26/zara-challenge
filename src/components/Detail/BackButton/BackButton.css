@@ -10,7 +10,7 @@
   position: fixed;
   top: 50px;
   left: 0;
-  width: 100%;
+  width: 'auto';
   font-family: 'Helvetica', sans-serif;
   z-index: 1000;
   display: flex;

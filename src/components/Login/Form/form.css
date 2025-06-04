@@ -29,10 +29,10 @@
 .login-button {
   width: 100%;
   padding: 0.875rem 1.5rem;
-  background-color: #4a90e2;
+  background-color: #1a1a1a;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 0px;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
@@ -40,7 +40,7 @@
 }
 
 .login-button:hover {
-  background-color: #357abd;
+  background-color: #4a4b4b;
 }
 
 .login-button:active {
@@ -48,13 +48,13 @@
 }
 
 .login-button:disabled {
-  background-color: #a0c4f3;
+  background-color: #a7a7a7;
   cursor: not-allowed;
   transform: none;
 }
 
 .form-footer {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   text-align: center;
   color: #666;
   font-size: 0.9rem;
@@ -62,13 +62,18 @@
 }
 
 .form-footer p {
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .text-button {
   background: none;
   border: none;
-  color: #4a90e2;
+  text-decoration: underline;
+  color: #1a1a1a;
   cursor: pointer;
   padding: 0.25rem 0.5rem;
   font-size: 0.9rem;

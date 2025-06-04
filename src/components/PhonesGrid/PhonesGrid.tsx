@@ -1,7 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getPhones, Phones } from '../../api/phoneService'
-import { RiArrowLeftSLine, RiArrowRightSLine, RiHeartLine, RiHeartFill } from 'react-icons/ri'
+import { getPhones, Phones } from '../../api/phones/phoneService'
+import {
+  RiArrowLeftSLine,
+  RiArrowRightSLine,
+  RiHeartLine,
+  RiHeartFill,
+} from 'react-icons/ri'
 
 import './PhonesGrid.css'
 import './SearchBar.css'
@@ -25,7 +30,7 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
 
   const toggleLike = useCallback((phoneId: string, e: React.MouseEvent) => {
     e.stopPropagation()
-    setLikedPhones(prev => {
+    setLikedPhones((prev) => {
       const newLiked = new Set(prev)
       if (newLiked.has(phoneId)) {
         newLiked.delete(phoneId)
@@ -59,14 +64,12 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
 
           fetchedPhones = [...fetchedPhones, ...uniqueNewPhones]
 
-          
           if (data.length < 20) break
 
-          
           currentPage++
         }
 
-        setPhones(fetchedPhones.slice(0, 20)) 
+        setPhones(fetchedPhones.slice(0, 20))
         setError(null)
       } catch {
         setPhones([])
@@ -129,10 +132,14 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
             onClick={() => navigate(`/phone/${phone.id}`)}
           >
             <img src={phone.imageUrl} alt={phone.name} className="image" />
-            <button 
-              className="like-button" 
+            <button
+              className="like-button"
               onClick={(e) => toggleLike(phone.id, e)}
-              aria-label={likedPhones.has(phone.id) ? 'Remove from favorites' : 'Add to favorites'}
+              aria-label={
+                likedPhones.has(phone.id)
+                  ? 'Remove from favorites'
+                  : 'Add to favorites'
+              }
             >
               {likedPhones.has(phone.id) ? (
                 <RiHeartFill className="heart-icon filled" />
@@ -143,8 +150,8 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
             <div className="text-container">
               <p className="brand">{phone.brand}</p>
               <div className="title">
-                <span className="name">{phone.name}</span> 
-                <span className="price">{phone.basePrice} EUR</span> 
+                <span className="name">{phone.name}</span>
+                <span className="price">{phone.basePrice} EUR</span>
               </div>
             </div>
           </div>
@@ -156,14 +163,15 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
           className="button"
           disabled={page === 0}
           onClick={handlePreviousPage}
-          aria-label='Previous Page'
+          aria-label="Previous Page"
         >
           <RiArrowLeftSLine />
         </button>
         <button
           className="button"
           disabled={phones.length < 20}
-          onClick={handleNextPage}aria-label='Next Page'
+          onClick={handleNextPage}
+          aria-label="Next Page"
         >
           <RiArrowRightSLine />
         </button>

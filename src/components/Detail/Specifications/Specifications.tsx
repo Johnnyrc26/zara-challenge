@@ -1,10 +1,10 @@
-import React from 'react';
-import { Phone } from '../../../api/phoneService';
-import './Specifications.css';
+import React from 'react'
+import { Phone } from '../../../api/phones/phoneService'
+import './Specifications.css'
 
 interface SpecificationsProps {
-  phone: Phone;
-  selectedStorage: string | null;
+  phone: Phone
+  selectedStorage: string | null
 }
 
 const Specifications: React.FC<SpecificationsProps> = ({ phone }) => {
@@ -13,8 +13,8 @@ const Specifications: React.FC<SpecificationsProps> = ({ phone }) => {
       <h3>SPECIFICATIONS</h3>
       <ul>
         <li>
-          <span>BRAND</span >
-          <p >{phone.brand || 'N/A'}</p>
+          <span>BRAND</span>
+          <p>{phone.brand || 'N/A'}</p>
         </li>
         <li>
           <span>NAME</span>
@@ -58,7 +58,7 @@ const Specifications: React.FC<SpecificationsProps> = ({ phone }) => {
         </li>
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default Specifications;
+export default Specifications

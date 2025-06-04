@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { MemoryRouter, useNavigate } from 'react-router-dom'
 import PhonesGrid from './PhonesGrid'
-import { getPhones } from '../../api/phoneService'
+import { getPhones } from '../../api/phones/phoneService'
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),

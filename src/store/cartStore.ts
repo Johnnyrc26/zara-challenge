@@ -1,84 +1,88 @@
 import { create } from 'zustand'
-
-export interface CartItem {
-  id: string
-  name: string
-  quantity: number
-  price: number
-  imageUrl: string
-  color: string
-  capacity: string
-}
+import { addToCart, getCartItems, removeFromCart, CartItem } from '../api/services/shoppingCartService'
 
 interface CartStore {
   cart: CartItem[]
-  addToCart: (item: CartItem) => void
-  removeFromCart: (item: CartItem) => void
+  loading: boolean
+  error: string | null
+  totalQuantity: number
+  fetchCart: () => Promise<number>
+  addToCart: (productId: string, color: string | null, capacity: string | null, imageUrl: string | null) => Promise<void>
+  removeFromCart: (productId: string) => Promise<void>
   getTotalItems: () => number
 }
 
 export const useCartStore = create<CartStore>((set, get) => ({
   cart: [],
-  addToCart: (item) => {
-    set((state) => {
-      const existingItem = state.cart.find(
-        (cartItem) =>
-          cartItem.id === item.id &&
-          cartItem.color === item.color &&
-          cartItem.capacity === item.capacity
-      )
+  loading: false,
+  error: null,
+  totalQuantity: 0,
 
-      if (existingItem) {
-        return {
-          cart: state.cart.map((cartItem) =>
-            cartItem.id === item.id &&
-            cartItem.color === item.color &&
-            cartItem.capacity === item.capacity
-              ? { ...cartItem, quantity: cartItem.quantity + 1 }
-              : cartItem
-          ),
-        }
-      } else {
-        return { cart: [...state.cart, { ...item, quantity: 1 }] }
-      }
-    })
+  fetchCart: async () => {
+    try {
+      set({ loading: true, error: null })
+      const items = await getCartItems()
+      const totalQuantity = items.reduce((sum, item) => sum + item.quantity, 0)
+      set({ cart: items, loading: false, error: null, totalQuantity })
+      return totalQuantity
+    } catch (error) {
+      console.error('Error in fetchCart:', error)
+      const errorMessage = error instanceof Error ? error.message : 'Failed to fetch cart'
+      set({ loading: false, error: errorMessage, totalQuantity: 0 })
+      throw new Error(errorMessage) // Throw to allow callers to handle errors
+    }
   },
 
-  removeFromCart: (item) => {
-    set((state) => {
-      const existingItem = state.cart.find(
-        (cartItem) =>
-          cartItem.id === item.id &&
-          cartItem.color === item.color &&
-          cartItem.capacity === item.capacity
-      );
-  
-      if (existingItem) {
-        if (existingItem.quantity > 1) {
-          return {
-            cart: state.cart.map((cartItem) =>
-              cartItem.id === item.id &&
-              cartItem.color === item.color &&
-              cartItem.capacity === item.capacity
-                ? { ...cartItem, quantity: cartItem.quantity - 1 }
-                : cartItem
-            ),
-          };
+  addToCart: async (productId: string, color: string | null, capacity: string | null, imageUrl: string | null) => {
+    try {
+      set({ loading: true, error: null })
+      const newItem = await addToCart(productId, 1, color, capacity, imageUrl)
+      set((state) => {
+        const existingItem = state.cart.find(
+          (item) => item.productId === productId && item.color === color && item.capacity === capacity
+        )
+        let newCart
+        if (existingItem) {
+          newCart = state.cart.map((item) =>
+            item.productId === productId && item.color === color && item.capacity === capacity
+              ? { ...item, quantity: newItem.quantity, imageUrl: newItem.imageUrl }
+              : item
+          )
         } else {
-          return {
-            cart: state.cart.filter(
-              (cartItem) =>
-                cartItem.id !== item.id ||
-                cartItem.color !== item.color ||
-                cartItem.capacity !== item.capacity
-            ),
-          };
+          newCart = [...state.cart, newItem]
         }
-      }
-      return { cart: state.cart }; 
-    });
+        const totalQuantity = newCart.reduce((sum, item) => sum + item.quantity, 0)
+        return { cart: newCart, loading: false, error: null, totalQuantity }
+      })
+    } catch (error) {
+      console.error('Error in addToCart:', error)
+      set((state) => ({
+        loading: false,
+        error: error instanceof Error ? error.message : 'Failed to add to cart',
+        totalQuantity: state.cart.reduce((sum, item) => sum + item.quantity, 0),
+      }))
+    }
   },
-  
+
+  removeFromCart: async (productId: string) => {
+    try {
+      set({ loading: true, error: null })
+      await removeFromCart(productId)
+      set((state) => {
+        const newCart = state.cart.filter((item) => item.productId !== productId)
+        const totalQuantity = newCart.reduce((sum, item) => sum + item.quantity, 0)
+        return { cart: newCart, loading: false, error: null, totalQuantity }
+      })
+    } catch (error) {
+      console.error('Error in removeFromCart:', error)
+      set((state) => ({
+        loading: false,
+        error: error instanceof Error ? error.message : 'Failed to remove from cart',
+        totalQuantity: state.cart.reduce((sum, item) => sum + item.quantity, 0),
+      }))
+    }
+  },
+
   getTotalItems: () => {
     const { cart } = get()
     return cart.reduce((total, item) => total + item.quantity, 0)

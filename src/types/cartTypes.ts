@@ -1,11 +1,12 @@
 export interface CartItem {
   id: string
+  productId: string
   name: string
   quantity: number
   price: number
   imageUrl: string
-  color: string
-  capacity: string
+  color: string | null
+  capacity: string | null
 }
 
 export interface CartContextType {
