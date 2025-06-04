@@ -8,7 +8,7 @@ interface CartStore {
   totalQuantity: number
   fetchCart: () => Promise<number>
   addToCart: (productId: string, color: string | null, capacity: string | null, imageUrl: string | null) => Promise<void>
-  removeFromCart: (productId: string) => Promise<void>
+  removeFromCart: (productId: string, color: string | null, capacity: string | null, imageUrl: string | null) => Promise<void>
   getTotalItems: () => number
 }
 
@@ -64,13 +64,47 @@ export const useCartStore = create<CartStore>((set, get) => ({
     }
   },
 
-  removeFromCart: async (productId: string) => {
+  removeFromCart: async (productId: string, color: string | null, capacity: string | null, imageUrl: string | null) => {
     try {
       set({ loading: true, error: null })
-      await removeFromCart(productId)
+      await removeFromCart(productId, color, capacity, imageUrl)
+  
       set((state) => {
-        const newCart = state.cart.filter((item) => item.productId !== productId)
+        const existingItem = state.cart.find(
+          (item) =>
+            item.productId === productId &&
+            item.color === color &&
+            item.capacity === capacity &&
+            item.imageUrl === imageUrl
+        )
+  
+        let newCart = state.cart
+  
+        if (existingItem) {
+          if (existingItem.quantity > 1) {
+            newCart = state.cart.map((item) =>
+              item.productId === productId &&
+              item.color === color &&
+              item.capacity === capacity &&
+              item.imageUrl === imageUrl
+                ? { ...item, quantity: item.quantity - 1 }
+                : item
+            )
+          } else {
+            newCart = state.cart.filter(
+              (item) =>
+                !(
+                  item.productId === productId &&
+                  item.color === color &&
+                  item.capacity === capacity &&
+                  item.imageUrl === imageUrl
+                )
+            )
+          }
+        }
+  
         const totalQuantity = newCart.reduce((sum, item) => sum + item.quantity, 0)
+  
         return { cart: newCart, loading: false, error: null, totalQuantity }
       })
     } catch (error) {

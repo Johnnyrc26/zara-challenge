@@ -31,7 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
   useEffect(() => {
     const loadCart = async () => {
       try {
-        await fetchCart() // Esto debería usar el ID del usuario actual
+        await fetchCart()
         setCartCount(getTotalItems())
       } catch (error) {
         console.error('Error loading cart:', error)
@@ -40,7 +40,6 @@ const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
 
     loadCart()
 
-    // Suscribirse a cambios en el carrito
     const unsubscribe = useCartStore.subscribe(() => {
       setCartCount(getTotalItems())
     })

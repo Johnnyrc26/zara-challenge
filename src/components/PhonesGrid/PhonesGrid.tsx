@@ -1,6 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getPhones, Phones } from '../../api/phones/phoneService'
+import { useAuth } from '../../store/hooks/useAuth'
+import {
+  toggleFavorite,
+  isFavorite,
+  getUserFavorites,
+} from '../../api/services/likesServices'
 import {
   RiArrowLeftSLine,
   RiArrowRightSLine,
@@ -16,6 +22,7 @@ interface PhonesGridProps {
   itemsPerPage?: number
   onLoadingChange?: (isLoading: boolean) => void
 }
+
 const PhonesGrid: React.FC<PhonesGridProps> = ({
   initialPage = 0,
   onLoadingChange,
@@ -25,21 +32,55 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
   const [error, setError] = useState<string | null>(null)
   const [page, setPage] = useState(initialPage)
   const [searchQuery, setSearchQuery] = useState('')
-  const [likedPhones, setLikedPhones] = useState<Set<string>>(new Set())
+  const [likedPhones, setLikedPhones] = useState<{ [key: string]: boolean }>({})
+  const { user } = useAuth()
   const navigate = useNavigate()
 
-  const toggleLike = useCallback((phoneId: string, e: React.MouseEvent) => {
-    e.stopPropagation()
-    setLikedPhones((prev) => {
-      const newLiked = new Set(prev)
-      if (newLiked.has(phoneId)) {
-        newLiked.delete(phoneId)
-      } else {
-        newLiked.add(phoneId)
+  useEffect(() => {
+    const loadUserFavorites = async () => {
+      if (!user) return
+
+      try {
+        const favorites = await getUserFavorites(user.id)
+        const favoritesMap = favorites.reduce(
+          (acc, phone) => {
+            if (phone) {
+              acc[phone.id] = true
+            }
+            return acc
+          },
+          {} as { [key: string]: boolean }
+        )
+
+        setLikedPhones(favoritesMap)
+      } catch (error) {
+        console.error('Error loading favorites:', error)
       }
-      return newLiked
-    })
-  }, [])
+    }
+
+    loadUserFavorites()
+  }, [user])
+
+  const toggleLike = useCallback(
+    async (phoneId: string, e: React.MouseEvent) => {
+      e.stopPropagation()
+      if (!user) {
+        console.log('Por favor inicia sesión para guardar favoritos')
+        return
+      }
+
+      try {
+        const newFavoriteState = await toggleFavorite(user.id, phoneId)
+        setLikedPhones((prev) => ({
+          ...prev,
+          [phoneId]: newFavoriteState,
+        }))
+      } catch (error) {
+        console.error('Error toggling favorite:', error)
+      }
+    },
+    [user]
+  )
 
   const fetchPhones = useCallback(
     async (page: number) => {
@@ -86,6 +127,29 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
     setPhones([])
     fetchPhones(page)
   }, [page, fetchPhones])
+
+  useEffect(() => {
+    if (user) {
+      const checkFavorites = async () => {
+        const favoritesMap: { [key: string]: boolean } = {}
+        for (const phone of phones) {
+          try {
+            const isFav = await isFavorite(user.id, phone.id)
+            favoritesMap[phone.id] = isFav
+          } catch (error) {
+            console.error(
+              `Error checking favorite for phone ${phone.id}:`,
+              error
+            )
+            favoritesMap[phone.id] = false
+          }
+        }
+        setLikedPhones(favoritesMap)
+      }
+
+      checkFavorites()
+    }
+  }, [phones, user])
 
   const handlePreviousPage = () => {
     if (page > 0) {
@@ -136,12 +200,12 @@ const PhonesGrid: React.FC<PhonesGridProps> = ({
               className="like-button"
               onClick={(e) => toggleLike(phone.id, e)}
               aria-label={
-                likedPhones.has(phone.id)
+                likedPhones[phone.id]
                   ? 'Remove from favorites'
                   : 'Add to favorites'
               }
             >
-              {likedPhones.has(phone.id) ? (
+              {likedPhones[phone.id] ? (
                 <RiHeartFill className="heart-icon filled" />
               ) : (
                 <RiHeartLine className="heart-icon" />

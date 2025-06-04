@@ -3,7 +3,6 @@ import { MemoryRouter } from 'react-router-dom';
 import LoginForm from './form';
 import '@testing-library/jest-dom';
 
-// Mock the useNavigate hook
 const mockNavigate = jest.fn();
 
 jest.mock('react-router-dom', () => ({
@@ -13,7 +12,6 @@ jest.mock('react-router-dom', () => ({
 
 describe('LoginForm', () => {
   beforeEach(() => {
-    // Clear all mocks before each test
     jest.clearAllMocks();
   });
 
@@ -88,11 +86,9 @@ describe('LoginForm', () => {
     const emailInput = screen.getByLabelText('Correo Electrónico');
     const submitButton = screen.getByRole('button', { name: /iniciar sesión/i });
 
-    // Trigger validation error
     fireEvent.click(submitButton);
     expect(await screen.findByText('El email es requerido')).toBeInTheDocument();
 
-    // Start typing to clear the error
     fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
     await waitFor(() => {
       expect(screen.queryByText('El email es requerido')).not.toBeInTheDocument();
@@ -114,21 +110,17 @@ describe('LoginForm', () => {
     fireEvent.change(passwordInput, { target: { value: 'password123' } });
     fireEvent.click(submitButton);
 
-    // Check if loading state is shown
     expect(await screen.findByText('Iniciando sesión...')).toBeInTheDocument();
 
-    // Wait for navigation after successful login
     await waitFor(() => {
       expect(mockNavigate).toHaveBeenCalledWith('/');
     });
   });
 
   it('shows error message when login fails', async () => {
-    // Mock console.error to avoid error logs in test output
     const originalError = console.error;
     console.error = jest.fn();
 
-    // Mock a failed login
     jest.spyOn(global, 'fetch').mockImplementationOnce(() =>
       Promise.reject(new Error('Login failed'))
     );
@@ -147,10 +139,8 @@ describe('LoginForm', () => {
     fireEvent.change(passwordInput, { target: { value: 'wrongpassword' } });
     fireEvent.click(submitButton);
 
-    // Check if error message is shown
     expect(await screen.findByText('Error al iniciar sesión. Verifica tus credenciales.')).toBeInTheDocument();
 
-    // Restore console.error
     console.error = originalError;
   });
 

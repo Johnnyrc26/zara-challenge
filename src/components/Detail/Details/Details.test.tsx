@@ -114,8 +114,7 @@ describe('Details Component', () => {
           selectedColor="Negro"
           onStorageChange={jest.fn()}
           onColorChange={jest.fn()}
-          onAddToCart={jest.fn()}
-        />
+          onAddToCart={jest.fn()} imageUrl={null}        />
       </CartProvider>
     )
 
@@ -135,8 +134,7 @@ describe('Details Component', () => {
           selectedColor="Negro"
           onStorageChange={mockOnStorageChange}
           onColorChange={jest.fn()}
-          onAddToCart={jest.fn()}
-        />
+          onAddToCart={jest.fn()} imageUrl={null}        />
       </CartProvider>
     )
 
@@ -154,8 +152,7 @@ describe('Details Component', () => {
           selectedColor="Negro"
           onStorageChange={jest.fn()}
           onColorChange={mockOnColorChange}
-          onAddToCart={jest.fn()}
-        />
+          onAddToCart={jest.fn()} imageUrl={null}        />
       </CartProvider>
     )
 
@@ -173,8 +170,7 @@ describe('Details Component', () => {
           selectedColor="Negro"
           onStorageChange={jest.fn()}
           onColorChange={jest.fn()}
-          onAddToCart={mockOnAddToCart}
-        />
+          onAddToCart={mockOnAddToCart} imageUrl={null}        />
       </CartProvider>
     )
 
@@ -201,8 +197,7 @@ describe('Details Component', () => {
           selectedColor=""
           onStorageChange={jest.fn()}
           onColorChange={jest.fn()}
-          onAddToCart={jest.fn()}
-        />
+          onAddToCart={jest.fn()} imageUrl={null}        />
       </CartProvider>
     )
 
@@ -218,31 +213,27 @@ describe('Details Component', () => {
           selectedColor="Negro"
           onStorageChange={jest.fn()}
           onColorChange={jest.fn()}
-          onAddToCart={jest.fn()}
+          onAddToCart={jest.fn()} imageUrl={null}
         />
       </CartProvider>
     )
 
-    // Verificar que el botón de like está presente
+
     const likeButton = screen.getByRole('button', { name: /add to favorites/i })
     expect(likeButton).toBeInTheDocument()
 
-    // Verificar que inicialmente muestra el corazón vacío
+
     const emptyHeart = screen.getByTestId('heart-icon')
     expect(emptyHeart).toHaveClass('detail-heart-icon')
     expect(emptyHeart).not.toHaveClass('filled')
-
-    // Hacer clic en el botón de like
+   
     fireEvent.click(likeButton)
 
-    // Verificar que ahora muestra el corazón lleno
     const filledHeart = screen.getByTestId('heart-icon')
     expect(filledHeart).toHaveClass('detail-heart-icon filled')
 
-    // Hacer clic de nuevo para quitar el like
     fireEvent.click(likeButton)
 
-    // Verificar que vuelve a mostrar el corazón vacío
     const emptyHeartAgain = screen.getByTestId('heart-icon')
     expect(emptyHeartAgain).toHaveClass('detail-heart-icon')
     expect(emptyHeartAgain).not.toHaveClass('filled')

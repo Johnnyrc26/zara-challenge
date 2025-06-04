@@ -39,7 +39,9 @@ const Product: React.FC<ProductProps> = ({ item }) => {
           <p>Quantity: {item.quantity}</p>
           <button
             className="remove-button"
-            onClick={() => removeFromCart(item.productId)}
+            onClick={() =>
+              removeFromCart(item.productId, item.color ?? null, item.capacity ?? null, item.imageUrl ?? null)
+            }
           >
             Remove
           </button>

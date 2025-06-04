@@ -57,10 +57,8 @@
   color: #666;
 }
 
-/* Responsive adjustments - Match desktop styles */
 @media (max-width: 480px) {
   .dropdown-menu {
-    /* Keep the same styles as desktop */
     position: absolute;
     top: 100%;
     right: 0;
@@ -70,7 +68,6 @@
     min-width: 180px;
   }
   
-  /* Remove the arrow on mobile */
   .dropdown-menu::after {
     display: none;
   }

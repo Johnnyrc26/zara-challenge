@@ -45,7 +45,6 @@ export const addToCart = async (
   try {
     const userId = await checkSession()
 
-    // First, check if there's an existing cart item with the same product, color, and capacity
     const { data: existingItem, error: fetchError } = await supabase
       .from('shopping_cart')
       .select('*')
@@ -61,7 +60,6 @@ export const addToCart = async (
     let result
 
     if (existingItem) {
-      // If item exists, update the quantity by adding the new quantity
       const { data, error: updateError } = await supabase
         .from('shopping_cart')
         .update({ quantity: existingItem.quantity + quantity })
@@ -72,7 +70,6 @@ export const addToCart = async (
       if (updateError) throw updateError
       result = data
     } else {
-      // If item doesn't exist, insert a new one
       const { data, error: insertError } = await supabase
       .from('shopping_cart')
       .insert({
@@ -123,12 +120,19 @@ export const getCartItems = async (): Promise<CartItem[]> => {
       data.map(async (item: SupabaseCartItem) => {
         try {
           const product = await getPhoneById(item.product_id)
+
+          const selectedStorage = item.capacity && product.storageOptions?.find(
+            option => option.capacity === item.capacity
+          )
+          
+          const price = selectedStorage ? selectedStorage.price : product.basePrice
+
           return {
             id: item.id,
             productId: item.product_id,
             name: product.name,
             quantity: item.quantity,
-            price: product.basePrice,
+            price: price,
             imageUrl: item.imageUrl,
             color: item.color,
             capacity: item.capacity,
@@ -147,16 +151,45 @@ export const getCartItems = async (): Promise<CartItem[]> => {
   }
 }
 
-export const removeFromCart = async (productId: string): Promise<void> => {
+export const removeFromCart = async (
+  productId: string,
+  color: string | null = null,
+  capacity: string | null = null,
+  imageUrl: string | null = null
+): Promise<void> => {
   try {
     const userId = await checkSession()
-    const { error } = await supabase
+
+    const normalize = (val: string | null | undefined) => val ?? null
+
+    const { data: existingItem, error: fetchError } = await supabase
       .from('shopping_cart')
-      .delete()
+      .select('*')
       .eq('user_id', userId)
       .eq('product_id', productId)
+      .eq('color', normalize(color))
+      .eq('capacity', normalize(capacity))
+      .eq('imageUrl', normalize(imageUrl))
+      .maybeSingle()
 
-    if (error) throw error
+    if (fetchError) throw fetchError
+    if (!existingItem) throw new Error('Item not found in cart')
+
+    if (existingItem.quantity > 1) {
+      const { error: updateError } = await supabase
+        .from('shopping_cart')
+        .update({ quantity: existingItem.quantity - 1 })
+        .eq('id', existingItem.id)
+
+      if (updateError) throw updateError
+    } else {
+      const { error: deleteError } = await supabase
+        .from('shopping_cart')
+        .delete()
+        .eq('id', existingItem.id)
+
+      if (deleteError) throw deleteError
+    }
   } catch (error) {
     console.error('Error removing from cart:', error)
     throw error

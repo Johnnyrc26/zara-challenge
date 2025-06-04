@@ -56,7 +56,6 @@ const LoginForm: React.FC = () => {
       [name]: value
     }));
     
-    // Clear error when user starts typing
     if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({
         ...prev,

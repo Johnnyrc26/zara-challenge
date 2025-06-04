@@ -26,7 +26,7 @@ describe('Input Component', () => {
         onChange={jest.fn()}
       />
     );
-    expect(screen.getByTestId('fa-envelope-icon')).toBeInTheDocument(); // Assuming you add data-testid to icons
+    expect(screen.getByTestId('fa-envelope-icon')).toBeInTheDocument(); 
   });
 
   it('renders lock icon and password toggle for password input type', () => {
@@ -37,7 +37,7 @@ describe('Input Component', () => {
         onChange={jest.fn()}
       />
     );
-    expect(screen.getByTestId('fa-lock-icon')).toBeInTheDocument(); // Assuming you add data-testid to icons
+    expect(screen.getByTestId('fa-lock-icon')).toBeInTheDocument(); 
     expect(screen.getByRole('button', { name: /mostrar contraseña/i })).toBeInTheDocument();
   });
 
@@ -55,8 +55,6 @@ describe('Input Component', () => {
     fireEvent.change(inputElement, { target: { value: 'Test Value' } });
 
     expect(handleChange).toHaveBeenCalledTimes(1);
-    // Note: We can't directly check the input's value if it's not controlled by state in this component
-    // but we can check if the onChange handler was called.
   });
 
   it('toggles password visibility', () => {
@@ -68,18 +66,15 @@ describe('Input Component', () => {
       />
     );
 
-    const passwordInput = screen.getByLabelText(/contraseña/i) as HTMLInputElement; // Assuming a label is present or use placeholder
+    const passwordInput = screen.getByLabelText(/contraseña/i) as HTMLInputElement; 
     const toggleButton = screen.getByRole('button', { name: /mostrar contraseña/i });
 
-    // Initially password should be hidden
     expect(passwordInput.type).toBe('password');
 
-    // Click to show password
     fireEvent.click(toggleButton);
     expect(passwordInput.type).toBe('text');
     expect(screen.getByRole('button', { name: /ocultar contraseña/i })).toBeInTheDocument();
 
-    // Click to hide password again
     fireEvent.click(toggleButton);
     expect(passwordInput.type).toBe('password');
     expect(screen.getByRole('button', { name: /mostrar contraseña/i })).toBeInTheDocument();
@@ -102,7 +97,7 @@ describe('Input Component', () => {
 
   it('does not render label if not provided', () => {
     render(<Input id="no-label-input" inputType="text" onChange={jest.fn()} />);
-    expect(screen.queryByLabelText(/.*/)).not.toBeInTheDocument(); // No label should be found
+    expect(screen.queryByLabelText(/.*/)).not.toBeInTheDocument(); 
   });
 
   it('renders with custom className', () => {
@@ -119,8 +114,7 @@ describe('Input Component', () => {
   });
 });
 
-// Helper to add data-testid to react-icons for easier testing
-// You might need to adjust your Input component to include these or use a different way to select icons
+
 jest.mock('react-icons/fa', () => ({
   ...jest.requireActual('react-icons/fa'),
   FaEnvelope: (props: React.SVGProps<SVGSVGElement>) => <svg {...props} data-testid="fa-envelope-icon" />,

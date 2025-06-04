@@ -140,7 +140,7 @@
   text-align: center;
 }
 
-.detail-like-button {
+/* .detail-like-button {
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 4px;
@@ -165,7 +165,7 @@
 
 .detail-heart-icon.filled {
   color: #ef4444;
-}
+} */
 
 .add-to-cart-button:hover {
   background-color: #333333;

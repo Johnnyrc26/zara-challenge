@@ -47,8 +47,7 @@ const PhoneDetail: React.FC = () => {
           selectedColor={selectedColor}
           onStorageChange={setSelectedStorage}
           onColorChange={setSelectedColor}
-          onAddToCart={() => navigate('/cart')}
-        />
+          onAddToCart={() => navigate('/cart')} imageUrl={null}        />
         <Specifications phone={phone} selectedStorage={selectedStorage} />
         <CarouselPhones similarProducts={phone.similarProducts} />
       </div>

@@ -9,6 +9,7 @@ jest.mock('../../../store/context/useCart', () => ({
 describe('Product Component', () => {
   const mockItem = {
     id: '1',
+    productId: '1',
     name: 'iPhone 15 Pro',
     imageUrl: 'https://example.com/iphone.jpg',
     capacity: '128GB',

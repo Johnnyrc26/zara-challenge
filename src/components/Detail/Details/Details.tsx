@@ -1,7 +1,6 @@
-import React, { useState, useCallback } from 'react'
+import React from 'react'
 import { useCartStore } from '../../../store/cartStore' 
 import { Phone } from '../../../api/phones/phoneService'
-import { RiHeartLine, RiHeartFill } from 'react-icons/ri'
 import './Details.css'
 
 interface DetailsProps {
@@ -24,11 +23,6 @@ const Details: React.FC<DetailsProps> = ({
   onAddToCart,
 }) => {
   const { addToCart, loading, error } = useCartStore() 
-  const [isLiked, setIsLiked] = useState(false)
-
-  const toggleLike = useCallback(() => {
-    setIsLiked((prev) => !prev)
-  }, [])
 
   const selectedColorOption = phone.colorOptions.find(
     (option) => option.name === selectedColor
@@ -36,13 +30,11 @@ const Details: React.FC<DetailsProps> = ({
 
   const selectedStorageOption = phone.storageOptions.find(
     (option) => option.capacity === selectedStorage
-  )
+  ) || phone.storageOptions[0]
 
   const selectedImageUrl = selectedColorOption?.imageUrl || imageUrl || phone.imageUrl
 
-  const totalPrice = selectedStorageOption
-    ? phone.basePrice + selectedStorageOption.price
-    : phone.basePrice
+  const totalPrice = selectedStorageOption?.price || phone.basePrice
 
   const handleAddToCart = async () => {
     if (selectedColor && selectedStorage) {
@@ -117,17 +109,6 @@ const Details: React.FC<DetailsProps> = ({
             disabled={!selectedStorage || !selectedColor || loading}
           >
             {loading ? 'AÑADIENDO...' : 'AÑADIR'}
-          </button>
-          <button
-            className="detail-like-button"
-            onClick={toggleLike}
-            aria-label={isLiked ? 'Remove from favorites' : 'Add to favorites'}
-          >
-            {isLiked ? (
-              <RiHeartFill className="detail-heart-icon filled" />
-            ) : (
-              <RiHeartLine className="detail-heart-icon" />
-            )}
           </button>
         </div>
         {error && <p className="error-message">{error}</p>}
