@@ -114,8 +114,7 @@ describe('Details Component', () => {
           selectedColor="Negro"
           onStorageChange={jest.fn()}
           onColorChange={jest.fn()}
-          onAddToCart={jest.fn()}
-        />
+          onAddToCart={jest.fn()} imageUrl={null}        />
       </CartProvider>
     )
 
@@ -135,8 +134,7 @@ describe('Details Component', () => {
           selectedColor="Negro"
           onStorageChange={mockOnStorageChange}
           onColorChange={jest.fn()}
-          onAddToCart={jest.fn()}
-        />
+          onAddToCart={jest.fn()} imageUrl={null}        />
       </CartProvider>
     )
 
@@ -154,8 +152,7 @@ describe('Details Component', () => {
           selectedColor="Negro"
           onStorageChange={jest.fn()}
           onColorChange={mockOnColorChange}
-          onAddToCart={jest.fn()}
-        />
+          onAddToCart={jest.fn()} imageUrl={null}        />
       </CartProvider>
     )
 
@@ -173,8 +170,7 @@ describe('Details Component', () => {
           selectedColor="Negro"
           onStorageChange={jest.fn()}
           onColorChange={jest.fn()}
-          onAddToCart={mockOnAddToCart}
-        />
+          onAddToCart={mockOnAddToCart} imageUrl={null}        />
       </CartProvider>
     )
 
@@ -201,11 +197,45 @@ describe('Details Component', () => {
           selectedColor=""
           onStorageChange={jest.fn()}
           onColorChange={jest.fn()}
-          onAddToCart={jest.fn()}
-        />
+          onAddToCart={jest.fn()} imageUrl={null}        />
       </CartProvider>
     )
 
     expect(screen.getByText('AÑADIR')).toBeDisabled()
+  })
+
+  it('muestra el botón de like y cambia su estado al hacer clic', () => {
+    render(
+      <CartProvider>
+        <Details
+          phone={mockPhone}
+          selectedStorage="256 GB"
+          selectedColor="Negro"
+          onStorageChange={jest.fn()}
+          onColorChange={jest.fn()}
+          onAddToCart={jest.fn()} imageUrl={null}
+        />
+      </CartProvider>
+    )
+
+
+    const likeButton = screen.getByRole('button', { name: /add to favorites/i })
+    expect(likeButton).toBeInTheDocument()
+
+
+    const emptyHeart = screen.getByTestId('heart-icon')
+    expect(emptyHeart).toHaveClass('detail-heart-icon')
+    expect(emptyHeart).not.toHaveClass('filled')
+   
+    fireEvent.click(likeButton)
+
+    const filledHeart = screen.getByTestId('heart-icon')
+    expect(filledHeart).toHaveClass('detail-heart-icon filled')
+
+    fireEvent.click(likeButton)
+
+    const emptyHeartAgain = screen.getByTestId('heart-icon')
+    expect(emptyHeartAgain).toHaveClass('detail-heart-icon')
+    expect(emptyHeartAgain).not.toHaveClass('filled')
   })
 })

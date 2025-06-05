@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { useNavigate } from 'react-router-dom'
 import CarouselPhones from './CarouselPhones'
-import { Phone } from '../../../api/phoneService'
+import { Phone } from '../../../api/phones/phoneService'
 
 jest.mock('react-router-dom', () => ({
   useNavigate: jest.fn(),
@@ -108,7 +108,8 @@ describe('CarouselPhones Component', () => {
             'http://prueba-tecnica-api-tienda-moviles.onrender.com/images/SMG-A35-light-blue.png',
         },
       ],
-      imageUrl: 'http://prueba-tecnica-api-tienda-moviles.onrender.com/images/GPX-8A.png', 
+      imageUrl:
+        'http://prueba-tecnica-api-tienda-moviles.onrender.com/images/GPX-8A.png',
     },
   ]
 
@@ -121,14 +122,13 @@ describe('CarouselPhones Component', () => {
   })
 
   it('renderiza correctamente los productos', () => {
-    
     render(<CarouselPhones similarProducts={mockProducts[0].similarProducts} />)
 
     expect(screen.getByText('Similar Items')).toBeInTheDocument()
-    
+
     expect(screen.getByText('iPhone 15 Pro Max')).toBeInTheDocument()
     expect(screen.getByText('Galaxy A25 5G')).toBeInTheDocument()
-    
+
     expect(screen.getAllByRole('img')).toHaveLength(6)
   })
 

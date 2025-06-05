@@ -1,9 +1,13 @@
 .products-count {
   font-size: 1.25rem;
-  color: #4b5563; /* gray-600 */
+  color: #4b5563; 
   margin-bottom: 1rem;
   font-family: 'Helvetica', sans-serif;
   font-weight: 200;
-  padding-left: 1rem;
+  padding: 0.75rem 1rem;
   position: fixed;
+  background: rgba(255, 255, 255, 0.7); 
+  backdrop-filter: blur(8px); 
+  -webkit-backdrop-filter: blur(8px); 
+  z-index: 10; 
 }

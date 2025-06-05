@@ -1,12 +1,13 @@
 import React from 'react'
-import { useCart } from '../../../store/context/useCart'
-import { Phone } from '../../../api/phoneService'
+import { useCartStore } from '../../../store/cartStore' 
+import { Phone } from '../../../api/phones/phoneService'
 import './Details.css'
 
 interface DetailsProps {
   phone: Phone
   selectedStorage: string | null
   selectedColor: string
+  imageUrl: string | null
   onStorageChange: (storage: string | null) => void
   onColorChange: (color: string) => void
   onAddToCart: () => void
@@ -16,11 +17,12 @@ const Details: React.FC<DetailsProps> = ({
   phone,
   selectedStorage,
   selectedColor,
+  imageUrl,
   onStorageChange,
   onColorChange,
   onAddToCart,
 }) => {
-  const { addToCart } = useCart()
+  const { addToCart, loading, error } = useCartStore() 
 
   const selectedColorOption = phone.colorOptions.find(
     (option) => option.name === selectedColor
@@ -28,39 +30,36 @@ const Details: React.FC<DetailsProps> = ({
 
   const selectedStorageOption = phone.storageOptions.find(
     (option) => option.capacity === selectedStorage
-  )
+  ) || phone.storageOptions[0]
 
-  const totalPrice = selectedStorageOption
-    ? phone.basePrice + selectedStorageOption.price
-    : phone.basePrice
+  const selectedImageUrl = selectedColorOption?.imageUrl || imageUrl || phone.imageUrl
 
-  const handleAddToCart = () => {
+  const totalPrice = selectedStorageOption?.price || phone.basePrice
+
+  const handleAddToCart = async () => {
     if (selectedColor && selectedStorage) {
-      addToCart({
-        id: phone.id,
-        name: `${phone.name}`,
-        quantity: 1,
-        price: totalPrice,
-        imageUrl: selectedColorOption?.imageUrl || phone.imageUrl,
-        color: selectedColorOption?.name || '',
-        capacity: selectedStorageOption?.capacity || '',
-      })
-      onAddToCart()
+      try {
+        await addToCart(phone.id, selectedColor, selectedStorage, selectedImageUrl) 
+        onAddToCart() 
+      } catch (err) {
+        console.error('Failed to add to cart:', err)
+        
+      }
     }
   }
 
   const ensureHttps = (url: string): string => {
     if (url.startsWith('http://')) {
-      return url.replace('http://', 'https://');
+      return url.replace('http://', 'https://')
     }
-    return url;
+    return url
   }
 
   return (
     <div className="phone-detail">
       <div className="phone-image">
         <img
-         src={ensureHttps(selectedColorOption?.imageUrl || phone.imageUrl)}
+          src={ensureHttps(selectedColorOption?.imageUrl || phone.imageUrl)}
           alt={phone.name}
         />
       </div>
@@ -103,13 +102,16 @@ const Details: React.FC<DetailsProps> = ({
             </div>
           </div>
         </div>
-        <button
-          className="add-to-cart-button"
-          onClick={handleAddToCart}
-          disabled={!selectedStorage || !selectedColor}
-        >
-          AÑADIR
-        </button>
+        <div className="action-buttons">
+          <button
+            className="add-to-cart-button"
+            onClick={handleAddToCart}
+            disabled={!selectedStorage || !selectedColor || loading}
+          >
+            {loading ? 'AÑADIENDO...' : 'AÑADIR'}
+          </button>
+        </div>
+        {error && <p className="error-message">{error}</p>}
       </div>
     </div>
   )
