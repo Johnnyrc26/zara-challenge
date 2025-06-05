@@ -107,8 +107,8 @@ const LoginForm: React.FC = () => {
         <Input
           id="email"
           name="email"
-          label="Correo Electrónico"
-          placeholder="Ingresa tu correo electrónico"
+          label="Email"
+          placeholder="Enter your email"
           inputType="email"
           value={formData.email}
           onChange={handleChange}
@@ -119,8 +119,8 @@ const LoginForm: React.FC = () => {
         <Input
           id="password"
           name="password"
-          label="Contraseña"
-          placeholder="Ingresa tu contraseña"
+          label="Password"
+          placeholder="Enter your password"
           inputType="password"
           value={formData.password}
           onChange={handleChange}
@@ -141,13 +141,13 @@ const LoginForm: React.FC = () => {
       
       <div className="form-footer">
         <p>
-          ¿No tienes una cuenta?{' '}
+          ¿Do not have an account?{' '}
           <button 
             type="button" 
             className="text-button"
             onClick={() => navigate('/register')}
           >
-            Regístrate
+            Register
           </button>
         </p>
         <button 
@@ -155,7 +155,7 @@ const LoginForm: React.FC = () => {
           className="text-button"
           onClick={() => navigate('/forgot-password')}
         >
-          ¿Olvidaste tu contraseña?
+          Forgot Password?
         </button>
       </div>
     </div>

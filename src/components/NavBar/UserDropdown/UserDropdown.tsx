@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { FiLogIn, FiLogOut, FiHeart } from 'react-icons/fi'
+import { FiLogIn, FiLogOut } from 'react-icons/fi'
 import { PiUser } from 'react-icons/pi'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../store/hooks/useAuth'
@@ -15,11 +15,6 @@ const UserDropdown: React.FC = () => {
   const toggleDropdown = () => setIsOpen(!isOpen)
   const handleLogin = () => {
     navigate('/login')
-    setIsOpen(false)
-  }
-
-  const handleFavorites = () => {
-    navigate('/favorites')
     setIsOpen(false)
   }
 
@@ -58,9 +53,6 @@ const UserDropdown: React.FC = () => {
         <div className="dropdown-menu">
           {isLoggedIn ? (
             <>
-              <button className="dropdown-item" onClick={handleFavorites}>
-                <FiHeart className="dropdown-icon" /> Favoritos
-              </button>
               <button className="dropdown-item" onClick={handleLogout}>
                 <FiLogOut className="dropdown-icon" /> Cerrar sesión
               </button>

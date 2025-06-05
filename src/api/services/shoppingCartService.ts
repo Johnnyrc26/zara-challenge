@@ -64,6 +64,10 @@ export const addToCart = async (
         .from('shopping_cart')
         .update({ quantity: existingItem.quantity + quantity })
         .eq('id', existingItem.id)
+        .eq('user_id', userId)
+        .eq('product_id', productId)
+        .eq('color', color)
+        .eq('capacity', capacity)
         .select()
         .single()
 

@@ -18,7 +18,7 @@ const Navbar: React.FC<NavbarProps> = ({ isLoading = false }) => {
   const { user } = useAuth()
 
   const isCartView = location.pathname === '/cart'
-  const isLoginView = location.pathname === '/login'
+  const isLoginView = location.pathname === '/login' || location.pathname === '/register'
 
   const handleHomeClick = () => {
     if (isLoginView) return
