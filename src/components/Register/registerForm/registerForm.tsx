@@ -26,6 +26,7 @@ const RegisterForm = () => {
   })
   const [formErrors, setFormErrors] = useState<FormErrors>({})
   const [isLoading, setIsLoading] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
   const { signUp } = useAuth()
 
   const validateForm = (): boolean => {
@@ -52,7 +53,7 @@ const RegisterForm = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
     setFormData((prevData) => ({ ...prevData, [name]: value }))
-    // Clear error when user types
+
     if (formErrors[name as keyof FormErrors]) {
       setFormErrors({
         ...formErrors,
@@ -71,7 +72,10 @@ const RegisterForm = () => {
       setIsLoading(true)
       try {
         await signUp(formData.email, formData.password)
-        navigate('/login')
+        setIsSuccess(true)
+        setTimeout(() => {
+          navigate('/login')
+        }, 1500)
       } catch (error) {
         console.error('Registration failed:', error)
         setFormErrors((prevErrors) => ({
@@ -82,6 +86,16 @@ const RegisterForm = () => {
         setIsLoading(false)
       }
     }
+  }
+
+  if (isSuccess) {
+    return (
+      <div className="register-success">
+        <h2>Registration Successful!</h2>
+        <p>Please check your email to verify your account.</p>
+        <p>Redirecting to login page...</p>
+      </div>
+    )
   }
 
   return (
