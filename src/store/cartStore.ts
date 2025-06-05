@@ -29,7 +29,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
       console.error('Error in fetchCart:', error)
       const errorMessage = error instanceof Error ? error.message : 'Failed to fetch cart'
       set({ loading: false, error: errorMessage, totalQuantity: 0 })
-      throw new Error(errorMessage) // Throw to allow callers to handle errors
+      throw new Error(errorMessage) 
     }
   },
 
